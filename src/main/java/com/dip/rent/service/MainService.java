@@ -1,16 +1,17 @@
 package com.dip.rent.service;
 
 
-import com.dip.rent.model.Order;
+import com.dip.rent.model.Flat;
 import com.dip.rent.model.Person;
+import com.dip.rent.repo.FlatRepo;
 import com.dip.rent.repo.OrderRepo;
 import com.dip.rent.repo.PersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MainService {
@@ -18,43 +19,90 @@ public class MainService {
     private PersonRepo personRepo;
     @Autowired
     private OrderRepo orderRepo;
+    @Autowired
+    private FlatRepo flatRepo;
 
-    public String todoNewPerson(){
-        //Person person1 = personRepo.save(new Person());
+    public Person todoNewPerson(){
+        Person person = new Person();
+        person.setNamePerson("name");
+        person.setCityPerson("City");
+        person.setCountryPerson("Country");
+        person.setAddressPerson("str avenu11, h.12.f.12");
+        person.setPassword("111111");
+        person.setPhone("+79518710569");
+        person.setRatingPerson(10);
+        Person person1 = personRepo.save(person);
 
-        Person person = personRepo.save(new Person("test2"));
-        System.out.println(person.getId()+" - " + person.getNamePerson());
-        //
-//        Person person3 = new Person();
-//        person3.setNamePerson("person3");
-//        //personRepo.save(person3);
-//        Set<Order> orders = new HashSet<>();
-//        orders.add(new Order("order1", person3));
-//        orders.add(new Order("order2", person3));
-//        orders.add(new Order("order3", person3));
-        //person3.setOrders(orders);
-        //
-        //personRepo.save(person3);
-        return "новый добавлен";
+        System.out.println("новый пользователь добавлен");
+
+        Flat flat = new Flat();
+        flat.setNameFlat("falt1");
+        flat.setCountryFlat("country1");
+        flat.setCityFlat("city1");
+        flat.setAddressFlat("str1");
+        flat.setAbout("text about");
+        flat.setPrice(100);
+        flat.setPerson(person1);
+        flatRepo.save(flat);
+        System.out.println("новое жилье добавлено");
+
+        return person1;
+    }
+
+    public String todoNewPerson(String name, String country, String city, String address, String password, String phone) {
+        Person person = new Person();
+        person.setNamePerson(name);
+        person.setCityPerson(city);
+        person.setCountryPerson(country);
+        person.setAddressPerson(address);
+        person.setPassword(password);
+        person.setPhone(phone);
+        person.setRatingPerson(10);
+        personRepo.save(person);
+
+        System.out.println("новый пользователь добавлен");
+        return "ok";
     }
     public String todoNewOrder(){
-        Order order = orderRepo.save(new Order("order test"));
-        System.out.println(order.getOrderId()+" - " + order.getNameOrder());
+
         return "новый ордер создан";
     }
 
-//    public ArrayList<Person> getAllPersons(){
-//        ArrayList<Order> orders = (ArrayList<Order>) orderRepo.findAll();
-//        for(Order o:orders){
-//            System.out.println("order - "+o.getOrderId()+", - "+o.getNameOrder()+", - "+o.getPerson().getId()+o.getPerson().getNamePerson());
-//        }
-//        System.out.println("-----");
-//        ArrayList<Person> listPersons = (ArrayList) personRepo.findAll();
-//        for(Person person: listPersons){
-//            System.out.println(person.getId()+" - " + person.getNamePerson());
-//            System.out.println("--------------");
-//        }
-//        return listPersons;
-//    }
+    public List<Person> getAllPersons(){
+        List<Person> listPersons = new ArrayList<>();
+        listPersons = (List<Person>) personRepo.findAll();
+
+        return  listPersons;
+    }
+
+    public List<Flat> getAllFlatId(long personId){
+
+        Optional<Person> person = personRepo.findById(personId);
+        System.out.println("выполнено");
+
+        return flatRepo.getAllFlatByPersonId(person);
+    }
+
+    public List<Flat> getAllFlat(){
+        return (List<Flat>) flatRepo.findAll();
+    }
+
+    public String createNewFlat(String name, String country, String city, String address,
+                                String about, int price, Person person){
+
+        Flat flat = new Flat();
+        flat.setNameFlat(name);
+        flat.setRatingFlat(10);
+        flat.setCountryFlat(country);
+        flat.setCityFlat(city);
+        flat.setAddressFlat(address);
+        flat.setAbout(about);
+        flat.setPrice(price);
+        flat.setPerson(person);
+        flatRepo.save(flat);
+        System.out.println("Flat to do");
+        return "Ok flat";
+    }
+
 
 }

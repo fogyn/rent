@@ -16,34 +16,25 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
-    @Column(name = "order_name")
-    private String nameOrder;
+    @Column(name = "flat_id",nullable = false)
+    private long flatId;
 
-//    @ManyToOne
-//    @JoinColumn(name = "personid")
-//    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-//    @JoinColumn(name = "person_id", nullable = false)
-    //@ManyToOne(fetch = FetchType.EAGER)
-//    @ManyToOne
-//    @JoinColumn(name="person_id")
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "person_id", nullable = false)
-//@ManyToOne(fetch = FetchType.EAGER)
-    //@ManyToOne(cascade = CascadeType.PERSIST, optional = false)
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "person_id", nullable = false)
-//    private Person person;
+    @Column(name = "person_id",nullable = false)
+    private long personId;
 
+    @Column(name = "state",nullable = false)
+    private StateEnum state;
+
+    @Column(name = "startDate",nullable = false)
+    private long startDate;
+
+    @Column(name = "plane_end_Date",nullable = false)
+    private long planeEndDate;
+
+    @Column(name = "endDate")
+    private long endDate;
+//
     public Order() {}
-    public Order(String name){
-        this.nameOrder = name;
-    }
-
-
-    public Order(String name, Person person) {
-        this.nameOrder = name;
-        //this.person = person;
-    }
 
     public Long getOrderId() {
         return orderId;
@@ -53,19 +44,54 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public String getNameOrder() {
-        return nameOrder;
+
+    public StateEnum getState() {
+        return state;
     }
 
-    public void setNameOrder(String nameOrder) {
-        this.nameOrder = nameOrder;
+    public void setState(StateEnum state) {
+        this.state = state;
     }
 
-//    public Person getPerson() {
-//        return person;
-//    }
-//
-//    public void setPerson(Person person) {
-//        this.person = person;
-//    }
+    public long getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(long startDate) {
+        this.startDate = startDate;
+    }
+
+    public long getPlaneEndDate() {
+        return planeEndDate;
+    }
+
+    public void setPlaneEndDate(long planeEndDate) {
+        this.planeEndDate = planeEndDate;
+    }
+
+    public long getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(long endDate) {
+        this.endDate = endDate;
+    }
+
+
+
+    public long getFlatId() {
+        return flatId;
+    }
+
+    public void setFlatId(long flatId) {
+        this.flatId = flatId;
+    }
+
+    public long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(long personId) {
+        this.personId = personId;
+    }
 }

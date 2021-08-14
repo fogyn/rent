@@ -79,7 +79,7 @@ public class MainService {
 
     public Person getPersonAutentification(String login, String password){
 
-        return personRepo.findPersonAutentification(login, password);
+        return personRepo.findPersonByPhoneAndPassword(login, password);
 
     }
 

@@ -12,6 +12,8 @@ import static java.lang.String.format;
 
 @Entity
 @Table(name = "PERSONS")
+//@NamedQuery(name = "ENTITY.findPersonAutentification",
+//        query = "SELECT p FROM PERSONS as p WHERE p.phone =: phone AND p.password =: password")
 public class Person {
 
     @Id

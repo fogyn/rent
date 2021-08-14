@@ -49,6 +49,24 @@ public class MainController {
         }
 
     }
+
+    @NotFound
+    @GetMapping("deletePerson/{id}")
+    public ResponseEntity<Boolean> deletePersonById(@PathVariable int id) {
+        System.out.println("зашел");
+        System.out.println("id - "+id);
+
+        if(mainService.deletePerson(id)){
+            return ResponseEntity.status(HttpStatus.OK).body(true);
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.FOUND).body(false);
+        }
+
+    }
+
+
+
     @NotFound
     @GetMapping("persons")
     public ResponseEntity<List<Person>> getListPersons() {

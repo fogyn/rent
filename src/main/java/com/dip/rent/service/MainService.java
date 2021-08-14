@@ -81,6 +81,17 @@ public class MainService {
         return personRepo.findPersonByPhoneAndPassword(login, password);
     }
 
+    public boolean deletePerson(long personId){
+        try{
+            personRepo.deleteById(personId);
+            return true;
+        }
+        catch (NullPointerException e){
+            return false;
+        }
+
+    }
+
     public List<Flat> getAllFlatId(long personId){
 
         return flatRepo.getAllFlatByPersonId(personId);

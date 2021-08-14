@@ -74,36 +74,20 @@ async function loadClients(){
     let ratingElement = document.getElementById("Rating");
     ratingElement.innerText = sessionStorage.getItem('Rating');
 
-    // let key = sessionStorage.getItem('userKey');
-    // if(key==null)
-    //     window.location = "http://localhost:8080/clients/authorize.html"
-    // let response =  await fetch("http://localhost:8080/api/Clients/apikey="+key);
-    // if(response.ok) {
-    //     let clients = await response.json();
-    //     let table = document.getElementById('Clients');
-    //     for(let i=0;i<clients.length;i++) {
-    //         let str = document.createElement('tr');
-    //         let name = document.createElement('td');
-    //         let view = document.createElement('a');
-    //         view.href = "http://localhost:8080/clients/view.html?id="+clients[i].id;
-    //         view.innerText = clients[i].name;
-    //         name.appendChild(view);
-    //         str.appendChild(name);
-    //         let address = document.createElement('td');
-    //         address.innerText = clients[i].address;
-    //         str.appendChild(address);
-    //         let phone = document.createElement('td');
-    //         phone.innerText = clients[i].phone;
-    //         str.appendChild(phone);
-    //         let edit = document.createElement('td');
-    //         let editLink = document.createElement('a');
-    //         editLink.href = "http://localhost:8080/clients/edit.html?id="+clients[i].id;
-    //         editLink.innerText = "edit";
-    //         edit.appendChild(editLink);
-    //         str.appendChild(edit);
-    //         table.appendChild(str);
-    //     }
-    // }
-    // else
-    //     alert("request has been failed");
+}
+
+async function deletePerson(){
+
+    alert(sessionStorage.getItem('Id'));
+    let response = await fetch("http://localhost:9000/deletePerson/"+Number(sessionStorage.getItem('Id')));
+
+
+    if(response.ok){
+        window.location = "http://localhost:9000";
+    }
+    else{
+        let deleteElement = document.getElementById('DeleteAnswer');
+        deleteElement.innerText = 'удаление не удалось!';
+    }
+
 }

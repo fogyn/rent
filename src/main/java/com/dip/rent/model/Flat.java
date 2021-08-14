@@ -35,11 +35,8 @@ public class Flat {
     @Column(name="flat_rating")
     private long ratingFlat;
 
-
-
-
-
     // img ?????
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "PersonId")
     private Person person;

@@ -3,7 +3,7 @@ package com.dip.rent.model;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
-
+import java.util.Date;
 
 
 @Entity
@@ -19,20 +19,24 @@ public class Order {
     @Column(name = "flat_id",nullable = false)
     private long flatId;
 
-    @Column(name = "person_id",nullable = false)
-    private long personId;
+//    @Column(name = "person_id",nullable = false)
+//    private long personId;
 
     @Column(name = "state",nullable = false)
     private StateEnum state;
 
     @Column(name = "startDate",nullable = false)
-    private long startDate;
+    private Date startDate;
 
     @Column(name = "plane_end_Date",nullable = false)
-    private long planeEndDate;
+    private Date planeEndDate;
 
     @Column(name = "endDate")
-    private long endDate;
+    private Date endDate;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "PersonId")
+    private Person person;
 //
     public Order() {}
 
@@ -53,31 +57,29 @@ public class Order {
         this.state = state;
     }
 
-    public long getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(long startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public long getPlaneEndDate() {
+    public Date getPlaneEndDate() {
         return planeEndDate;
     }
 
-    public void setPlaneEndDate(long planeEndDate) {
+    public void setPlaneEndDate(Date planeEndDate) {
         this.planeEndDate = planeEndDate;
     }
 
-    public long getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(long endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-
-
 
     public long getFlatId() {
         return flatId;
@@ -87,11 +89,19 @@ public class Order {
         this.flatId = flatId;
     }
 
-    public long getPersonId() {
-        return personId;
+//    public long getPersonId() {
+//        return personId;
+//    }
+//
+//    public void setPersonId(long personId) {
+//        this.personId = personId;
+//    }
+
+    public Person getPerson() {
+        return person;
     }
 
-    public void setPersonId(long personId) {
-        this.personId = personId;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

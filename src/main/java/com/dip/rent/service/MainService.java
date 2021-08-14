@@ -30,6 +30,7 @@ public class MainService {
         person.setAddressPerson("str avenu11, h.12.f.12");
         person.setPassword("111111");
         person.setPhone("+79518710569");
+        person.setEmail("test@mail.ru");
         person.setRatingPerson(10);
         Person person1 = personRepo.save(person);
 
@@ -49,7 +50,7 @@ public class MainService {
         return person1;
     }
 
-    public String todoNewPerson(String name, String country, String city, String address, String password, String phone) {
+    public Person todoNewPerson(String name, String country, String city, String address, String password, String phone, String email) {
         Person person = new Person();
         person.setNamePerson(name);
         person.setCityPerson(city);
@@ -57,11 +58,12 @@ public class MainService {
         person.setAddressPerson(address);
         person.setPassword(password);
         person.setPhone(phone);
+        person.setEmail(email);
         person.setRatingPerson(10);
-        personRepo.save(person);
+        Person person1 = personRepo.save(person);
 
         System.out.println("новый пользователь добавлен");
-        return "ok";
+        return person1;
     }
     public String todoNewOrder(){
 
@@ -75,33 +77,53 @@ public class MainService {
         return  listPersons;
     }
 
+    public Person getPersonAutentification(String login, String password){
+
+        return personRepo.findPersonAutentification(login, password);
+
+    }
+
     public List<Flat> getAllFlatId(long personId){
 
-        Optional<Person> person = personRepo.findById(personId);
-        System.out.println("выполнено");
-
-        return flatRepo.getAllFlatByPersonId(person);
+        return flatRepo.getAllFlatByPersonId(personId);
     }
 
     public List<Flat> getAllFlat(){
+
         return (List<Flat>) flatRepo.findAll();
     }
 
     public String createNewFlat(String name, String country, String city, String address,
                                 String about, int price, Person person){
+        System.out.println("id person - "+person.getId());
+            Optional<Person> person1 = personRepo.findById(person.getId());
+            if(person1.isPresent()){
+                System.out.println("id person2 - "+person1.get().getId());
+                Flat flat = new Flat();
+                flat.setNameFlat(name);
+                flat.setRatingFlat(10);
+                flat.setCountryFlat(country);
+                flat.setCityFlat(city);
+                flat.setAddressFlat(address);
+                flat.setAbout(about);
+                flat.setPrice(price);
+                flat.setPerson(person1.get());
+                Flat f = flatRepo.save(flat);
 
-        Flat flat = new Flat();
-        flat.setNameFlat(name);
-        flat.setRatingFlat(10);
-        flat.setCountryFlat(country);
-        flat.setCityFlat(city);
-        flat.setAddressFlat(address);
-        flat.setAbout(about);
-        flat.setPrice(price);
-        flat.setPerson(person);
-        flatRepo.save(flat);
-        System.out.println("Flat to do");
-        return "Ok flat";
+                System.out.println("Flat to do");
+                System.out.println(f.getPerson().getId());
+                return "Ok flat";
+            }
+            else{
+                System.out.println("ничего нет");
+                return "bed";
+            }
+
+
+
+
+
+
     }
 
 

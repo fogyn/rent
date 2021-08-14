@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/autorize.js" ></script>
+</head>
+<body>
+
+    <section class="network" style="margin-top: 100px">
+        <div class="container">
+            <div class="row r0">
+                <div class="col">
+                    <h1>
+                        Главная
+                    </h1>
+                    <div>
+                        <a href="registration.html">Регистрация</a>
+                    </div>
+                    <div>
+                        <form>
+                            <label>Логин-Телефон: </label>
+                            <input type="text" id="Phone" /><br />
+                            <label>Пароль: </label>
+                            <input type="password" id="Password"/><br />
+                            <!--<label>Фото: </label>
+                            <input type="file" id="image"><br/> -->
+                            <input type="button" value="Отправить" onclick="autorizeClient()"/>
+                        </form>
+                        <div id="ErrorAutentification"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

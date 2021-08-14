@@ -33,7 +33,11 @@ public class Person {
 
     @Column(name="phone",unique = true,length = 12,nullable = false)
     private String phone;
+    @Column(name="email",unique = true,nullable = false)
+    private String email;
 
+//    @Column(name="img")
+//    private Binary img;
 
 
     @Column(name="password",nullable = false)
@@ -45,6 +49,10 @@ public class Person {
     @OneToMany(mappedBy = "person",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Flat> flats;
+
+    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Order> orders;
 
     /**
      * Конструктор.
@@ -124,6 +132,19 @@ public class Person {
         this.flats = flats;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
 
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

@@ -1,5 +1,6 @@
 package com.dip.rent.controller;
 
+import com.dip.rent.AutentificationDTO;
 import com.dip.rent.model.Flat;
 import com.dip.rent.model.Person;
 import com.dip.rent.service.MainService;
@@ -27,22 +28,27 @@ public class MainController {
         return ResponseEntity.status(HttpStatus.OK).body(newPerson);
     }
     @NotFound
-    @PostMapping("create-new_person")
-    public ResponseEntity<String> createPerson(@RequestBody Person person) {
+    @PostMapping("create-new-person")
+    public ResponseEntity<Person> createPerson(@RequestBody Person person) {
 
-        String answer = mainService.todoNewPerson(person.getNamePerson(), person.getCountryPerson(), person.getCityPerson(),
-                person.getAddressPerson(), person.getPassword(), person.getPhone());
-        return ResponseEntity.status(HttpStatus.OK).body(answer);
+        Person personSQL = mainService.todoNewPerson(person.getNamePerson(), person.getCountryPerson(), person.getCityPerson(),
+                person.getAddressPerson(), person.getPassword(), person.getPhone(), person.getEmail());
+        return ResponseEntity.status(HttpStatus.OK).body(personSQL);
     }
-
     @NotFound
-    @PostMapping("create-new_flat")
-    public ResponseEntity<String> createFlat(@RequestBody Flat flat) {
+    @PostMapping("autentification")
+    public ResponseEntity<Person> autentificationPerson(@RequestBody AutentificationDTO autentificationDTO) {
 
-        String answer = mainService.createNewFlat(flat.getNameFlat(), flat.getCountryFlat(), flat.getCityFlat(), flat.getAddressFlat(),
-                flat.getAbout(), flat.getPrice(), flat.getPerson());
-        return ResponseEntity.status(HttpStatus.OK).body(answer);
+        Person personSQL = mainService.getPersonAutentification(autentificationDTO.getLogin(), autentificationDTO.getPassword());
+        if(personSQL!=null){
+            return ResponseEntity.status(HttpStatus.OK).body(personSQL);
+        }
+        return ResponseEntity.status(HttpStatus.FOUND).body(new Person());
+
     }
+
+
+
 
     @NotFound
     @GetMapping("persons")
@@ -61,8 +67,19 @@ public class MainController {
     @NotFound
     @GetMapping("flatByPerson/{id}")
     public ResponseEntity<List<Flat>> getListFlatByPersonId(@PathVariable int id) {
-        System.out.println("зашел = "+id);
+        //System.out.println("зашел = "+id);
         return ResponseEntity.status(HttpStatus.OK).body(mainService.getAllFlatId(id));
     }
+    @NotFound
+    @PostMapping("create-new_flat")
+    public ResponseEntity<String> createFlat(@RequestBody Flat flat) {
+
+        System.out.println("проверка "+flat.getPerson().getId());
+        String answer = mainService.createNewFlat(flat.getNameFlat(), flat.getCountryFlat(), flat.getCityFlat(), flat.getAddressFlat(),
+                flat.getAbout(), flat.getPrice(), flat.getPerson());
+        return ResponseEntity.status(HttpStatus.OK).body(answer);
+    }
+
+
 
 }

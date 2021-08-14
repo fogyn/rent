@@ -1,0 +1,21 @@
+body {
+    background-color: aqua;
+}
+.col {
+    display: flex;
+    justify-content: center;
+}
+.col a{
+    height: 48px;
+}
+.col p {
+    display: flex;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    background-color: yellow;
+
+}
+label {
+    background-color: yellow;
+}

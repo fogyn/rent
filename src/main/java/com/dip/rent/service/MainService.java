@@ -78,9 +78,7 @@ public class MainService {
     }
 
     public Person getPersonAutentification(String login, String password){
-
         return personRepo.findPersonByPhoneAndPassword(login, password);
-
     }
 
     public List<Flat> getAllFlatId(long personId){

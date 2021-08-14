@@ -39,17 +39,16 @@ public class MainController {
     @PostMapping("autentification")
     public ResponseEntity<Person> autentificationPerson(@RequestBody AutentificationDTO autentificationDTO) {
 
+
         Person personSQL = mainService.getPersonAutentification(autentificationDTO.getLogin(), autentificationDTO.getPassword());
         if(personSQL!=null){
             return ResponseEntity.status(HttpStatus.OK).body(personSQL);
         }
-        return ResponseEntity.status(HttpStatus.FOUND).body(new Person());
+        else {
+            return ResponseEntity.status(HttpStatus.FOUND).body(new Person());
+        }
 
     }
-
-
-
-
     @NotFound
     @GetMapping("persons")
     public ResponseEntity<List<Person>> getListPersons() {

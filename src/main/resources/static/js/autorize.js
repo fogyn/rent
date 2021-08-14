@@ -4,7 +4,7 @@ function getClientParameters(){
     let passwordElement = document.getElementById("Password");
 
     return {
-        phone: phoneElement.value,
+        login: phoneElement.value,
         password: passwordElement.value,
         };
 }

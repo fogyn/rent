@@ -3,6 +3,7 @@ package com.dip.rent.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.sql.Blob;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,8 +38,9 @@ public class Person {
     @Column(name="email",unique = true,nullable = false)
     private String email;
 
-//    @Column(name="img")
-//    private Binary img;
+    @Lob
+    @Column(name="img")
+    private byte[] image;
 
 
     @Column(name="password",nullable = false)
@@ -47,11 +49,11 @@ public class Person {
     @Column(name="person_rating")
     private long ratingPerson;
 
-    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Flat> flats;
 
-    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Order> orders;
 
@@ -147,5 +149,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }

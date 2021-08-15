@@ -30,9 +30,18 @@ public class MainController {
     @NotFound
     @PostMapping("create-new-person")
     public ResponseEntity<Person> createPerson(@RequestBody Person person) {
+        System.out.println("размер фото - "+person.getImage().length);
 
         Person personSQL = mainService.todoNewPerson(person.getNamePerson(), person.getCountryPerson(), person.getCityPerson(),
-                person.getAddressPerson(), person.getPassword(), person.getPhone(), person.getEmail());
+                person.getAddressPerson(), person.getPassword(), person.getPhone(), person.getEmail(), person.getImage());
+        return ResponseEntity.status(HttpStatus.OK).body(personSQL);
+    }
+
+    @NotFound
+    @PostMapping("updatePerson")
+    public ResponseEntity<Person> updatePerson(@RequestBody Person person) {
+        System.out.println("id - "+person.getId());
+        Person personSQL = mainService.todoUpdatePerson(person);
         return ResponseEntity.status(HttpStatus.OK).body(personSQL);
     }
     @NotFound

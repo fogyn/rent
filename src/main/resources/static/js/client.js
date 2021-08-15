@@ -1,48 +1,4 @@
-async function updatePerson(){
-    alert("редактирование");
-    // let client = getClientParameters();
-    // //client.id =0;
-    // let response = await fetch('http://localhost:9000/create-new-person',{
-    //     method: 'POST',
-    //     headers:{
-    //         'Content-Type':'application/json;charset=utf-8'
-    //     },
-    //     body: JSON.stringify(client)
-    // });
-    // if(response.ok) {
-    //     alert("регистрация ok");
-    //     window.location = "http://localhost:9000/client/client-autentification.html";
-    // }
-    // else{
-    //     alert('ошибка добавления данных');
-    // }
 
-
-
-}
-async function deletePerson(){
-    alert("удаление");
-
-    // let client = getClientParameters();
-    // //client.id =0;
-    // let response = await fetch('http://localhost:9000/create-new-person',{
-    //     method: 'POST',
-    //     headers:{
-    //         'Content-Type':'application/json;charset=utf-8'
-    //     },
-    //     body: JSON.stringify(client)
-    // });
-    // if(response.ok) {
-    //     alert("регистрация ok");
-    //     window.location = "http://localhost:9000/client/client-autentification.html";
-    // }
-    // else{
-    //     alert('ошибка добавления данных');
-    // }
-
-
-
-}
 async function loadClients(){
     let nameElementSpan = document.getElementById('NameSpan');
     nameElementSpan.innerText = sessionStorage.getItem('Name');
@@ -74,6 +30,29 @@ async function loadClients(){
     let ratingElement = document.getElementById("Rating");
     ratingElement.innerText = sessionStorage.getItem('Rating');
 
+    let imgElem = document.getElementById("imgElem");
+
+
+
+    // превращение массива в строку
+    let preview = document.getElementById("ImgPreview");
+    let arrayByte = sessionStorage.getItem('Img');
+    alert(arrayByte.length);
+    // кодировка не совпадает с отправкой
+    alert(arrayByte);
+    //
+    let str = "";
+    for(i = 0; i<arrayByte.length; i++){
+        str +=String.fromCharCode(parseInt(arrayByte[i], 16));
+    }
+    //str = String.fromCharCode(arrayByte);
+    //alert(str);
+    preview.src = str;
+
+
+
+
+
 }
 
 async function deletePerson(){
@@ -90,4 +69,7 @@ async function deletePerson(){
         deleteElement.innerText = 'удаление не удалось!';
     }
 
+}
+function updatePerson(){
+    window.location = "http://localhost:9000/client/client-update.html";
 }

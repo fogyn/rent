@@ -7,6 +7,7 @@ import com.dip.rent.repo.FlatRepo;
 import com.dip.rent.repo.OrderRepo;
 import com.dip.rent.repo.PersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -49,6 +50,24 @@ public class MainService {
 
         return person1;
     }
+    public Person todoNewPerson(String name, String country, String city, String address, String password, String phone, String email, byte[] image) {
+        //System.out.println("длина в сервисе - "+image.length);
+        Person person = new Person();
+        person.setNamePerson(name);
+        person.setCityPerson(city);
+        person.setCountryPerson(country);
+        person.setAddressPerson(address);
+        person.setPassword(password);
+        person.setPhone(phone);
+        person.setEmail(email);
+        person.setRatingPerson(10);
+        person.setImage(image);
+        Person person1 = personRepo.save(person);
+        //System.out.println("Длина из базы - "+person1.getImage().length);
+
+        System.out.println("новый пользователь добавлен");
+        return person1;
+    }
 
     public Person todoNewPerson(String name, String country, String city, String address, String password, String phone, String email) {
         Person person = new Person();
@@ -65,8 +84,17 @@ public class MainService {
         System.out.println("новый пользователь добавлен");
         return person1;
     }
-    public String todoNewOrder(){
 
+    public Person todoUpdatePerson(Person person){
+
+        Person person1 = personRepo.save(person);
+
+
+        System.out.println("пользователь отредактирован");
+        return person1;
+    }
+
+    public String todoNewOrder(){
         return "новый ордер создан";
     }
 

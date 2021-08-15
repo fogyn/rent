@@ -31,6 +31,7 @@ async function autorizeClient(){
         sessionStorage.setItem('Email',answer.email);
         sessionStorage.setItem('Password',answer.password);
         sessionStorage.setItem('Rating',answer.ratingPerson);
+        sessionStorage.setItem('Img',answer.image);
 
 
 

@@ -2,11 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Registration</title>
-    <script src="../js/registration.js" ></script>
+    <title>Client-Update</title>
+    <script src="../js/client-update.js" ></script>
 </head>
-<body>
-<p>Регистрация</p>
+<body onload="loadClientforUpdate()">
+<h1>
+    Вы на странице редактирования данных ползователя.
+</h1>
+<h3>
+    Отредактируйте данные, и нажмите - "OK"
+</h3>
 <form>
     <label>Имя</label>
     <input type="text" id="Name" /><br />
@@ -22,14 +27,10 @@
     <input type="text" id="Email" /><br />
     <label>Пароль: </label>
     <input type="password" id="Password"/><br />
-    <label>Фото: </label>
-    <!--<input type="file" id="Img"/><br />-->
-    <input type="file" id="Img" onchange="previewFile()"><br>
-    <img src="" id="ImgPreview" height="200" alt="Image preview...">
-
-    <input type="button" value="Отправить" onclick="newPerson()"/>
-
-
+    <input type="button" value="OK" onclick="updatePerson()"/>
+    <div id="UpdateAnswer"></div>
 </form>
+
+
 </body>
 </html>

@@ -1,6 +1,28 @@
-let img = [];
+async function loadClientforUpdate(){
+    let nameElement = document.getElementById('Name');
+    nameElement.value = sessionStorage.getItem('Name');
+
+    let addressElement = document.getElementById('Address');
+    addressElement.value = sessionStorage.getItem('Address');
+
+    let cityElement = document.getElementById('City');
+    cityElement.value = sessionStorage.getItem('City');
+
+    let countryElement = document.getElementById('Country');
+    countryElement.value = sessionStorage.getItem('Country');
+
+    let phoneElement = document.getElementById('Phone');
+    phoneElement.value = sessionStorage.getItem('Phone');
+
+    let emailElement = document.getElementById('Email');
+    emailElement.value = sessionStorage.getItem('Email');
+
+    let passwordElement = document.getElementById("Password");
+    passwordElement.value = sessionStorage.getItem('Password');
+
+}
 function getClientParameters(){
-    //let idElement = document.getElementById('Id');
+    let idElement = sessionStorage.getItem('Id');
     let nameElement = document.getElementById('Name');
     let addressElement = document.getElementById('Address');
     let cityElement = document.getElementById('City');
@@ -8,39 +30,39 @@ function getClientParameters(){
     let phoneElement = document.getElementById('Phone');
     let emailElement = document.getElementById('Email');
     let passwordElement = document.getElementById("Password");
-    //let imageElement = document.getElementById("Img").files[0];
+    let ratingElement = sessionStorage.getItem('Rating');
 
-
+    alert(idElement);
 
     return {
-
+        id: idElement,
         namePerson: nameElement.value,
         cityPerson: cityElement.value,
         countryPerson: countryElement.value,
         addressPerson: addressElement.value,
         phone: phoneElement.value,
         email: emailElement.value,
-        image: img,
         password: passwordElement.value,
-        ratingPerson: 10
+        ratingPerson: ratingElement
     };
 }
 
-async function newPerson(){
 
-    let client = getClientParameters();
-    //client.id =0;
-    let response = await fetch('http://localhost:9000/create-new-person',{
+async function updatePerson(){
+
+    let updatePerson = getClientParameters();
+
+    //
+    let response = await fetch('http://localhost:9000/updatePerson',{
         method: 'POST',
         headers:{
             'Content-Type':'application/json;charset=utf-8'
         },
-        body: JSON.stringify(client)
+        body: JSON.stringify(updatePerson)
     });
     if(response.ok) {
-        alert("регистрация ok");
+        alert("update готов");
         let answer = await response.json();
-
         sessionStorage.setItem('Id',answer.id);
         sessionStorage.setItem('Name',answer.namePerson);
         sessionStorage.setItem('Address',answer.addressPerson);
@@ -50,39 +72,15 @@ async function newPerson(){
         sessionStorage.setItem('Email',answer.email);
         sessionStorage.setItem('Password',answer.password);
         sessionStorage.setItem('Rating',answer.ratingPerson);
-        sessionStorage.setItem('Img',answer.image);
+
+
 
         window.location = "http://localhost:9000/client/client-autentification.html";
     }
     else{
         alert('ошибка добавления данных');
-    }
-}
-
-function previewFile() {
-    let preview = document.getElementById("ImgPreview");
-    let file    = document.getElementById("Img").files[0];
-    let reader  = new FileReader();
-
-    reader.onloadend = function () {
-        let str = reader.result;
-       //????????? зачем отделять стартовую часть
-        let parts = str.split(";base64,");
-        alert(parts[1]);
-        // превращение строки в массив для контроллера
-        for(i=0;i<str.length;i++){
-            let code = str.charCodeAt(i);
-            img.push(code & 255, code>>8);
-
-
-        }
-
-        preview.src = str;
+        let updateElement = document.getElementById('UpdateAnswer');
+        updateElement.innerText = 'редактирование не удалось!';
     }
 
-    if (file) {
-        reader.readAsDataURL(file);
-    } else {
-        preview.src = "";
-    }
 }

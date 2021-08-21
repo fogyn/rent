@@ -3,62 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <title>Client-Autentification</title>
+
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.css">
     <script src="../js/client.js" ></script>
+    <script src="../js/flat.js" ></script>
+
 </head>
 <body onload="loadClients()">
-      <h1>
-        Приветсствую зарегистрированный пользователь <span id="NameSpan"></span>
-      </h1>
-<hr>
-      <div>
-          <div style="display: flex">
-              <label>Id - </label>
-              <div id="Id"></div>
-          </div>
-          <div style="display: flex">
-              <label>Имя - </label>
-              <div id="Name"></div>
-          </div>
-          <div style="display: flex">
-              <label>Адрес - </label>
-              <div id="Address"></div>
-          </div>
-          <div style="display: flex">
-              <label>Город - </label>
-              <div id="City"></div>
-          </div>
-          <div style="display: flex">
-              <label>Страна - </label>
-              <div id="Country"></div>
-          </div>
-          <div style="display: flex">
-              <label>Телефон - </label>
-              <div id="Phone" ></div>
-          </div>
-          <div style="display: flex">
-              <label>email - </label>
-              <div id="Email" ></div>
-          </div>
-          <div style="display: flex">
-              <label>Пароль - </label>
-              <div id="Password"></div>
-          </div>
-          <div style="display: flex">
-              <label>Рейтинг - </label>
-              <div id="Rating"></div>
-          </div>
-          <div style="display: flex">
-              <label>Image - </label>
-              <img id="imgElem"/>
-              <img src="" id="ImgPreview" height="200" alt="Image preview...">
-          </div>
 
-      </div>
-<hr>
-<div>
-    <input type="button" value="Редактировать" onclick="updatePerson()"/>
-    <input type="button" value="Удалить" onclick="deletePerson()"/>
-    <div id="DeleteAnswer"></div>
-</div>
+
+      <section class="network" style="margin-top: 100px">
+          <div class="container">
+              <div class="row r0">
+                  <div class="col">
+                      <h1>
+                          Приветствую зарегистрированный пользователь <span id="NameSpan"></span>
+                      </h1>
+                      <hr>
+                      <div style="display: flex">
+                          <label>Id - </label>
+                          <div id="Id"></div>
+                      </div>
+                      <div style="display: flex">
+                          <label>Имя - </label>
+                          <div id="Name"></div>
+                      </div>
+                      <div style="display: flex">
+                          <label>Адрес - </label>
+                          <div id="Address"></div>
+                      </div>
+                      <div style="display: flex">
+                          <label>Город - </label>
+                          <div id="City"></div>
+                      </div>
+                      <div style="display: flex">
+                          <label>Страна - </label>
+                          <div id="Country"></div>
+                      </div>
+                      <div style="display: flex">
+                          <label>Телефон - </label>
+                          <div id="Phone" ></div>
+                      </div>
+                      <div style="display: flex">
+                          <label>email - </label>
+                          <div id="Email" ></div>
+                      </div>
+                      <div style="display: flex">
+                          <label>Пароль - </label>
+                          <div id="Password"></div>
+                      </div>
+                      <div style="display: flex">
+                          <label>Рейтинг - </label>
+                          <div id="Rating"></div>
+                      </div>
+                      <div style="display: flex">
+                          <label>Image - </label>
+                          <img src="" id="ImgPreview" height="200" alt="Image preview...">
+                      </div>
+
+                      <div>
+                          <input type="button" value="Редактировать" onclick="updatePerson()"/>
+                          <input type="button" value="Удалить" onclick="deletePerson()"/>
+                          <div id="DeleteAnswer"></div>
+                      </div>
+
+                  </div>
+              </div>
+              <div class="row r1" style="display: flex;">
+                  <div class="col с1">
+                      <hr>
+                      <h5>
+                          Список вашей недвижимости, для сдачи в аренду
+                      </h5>
+                      <div>
+
+                          <a href="../flat/new-flat.html">Создать новый объект недвижимости</a>
+                      </div>
+                      <div id="ListFlat">
+
+                      </div>
+
+                  </div>
+                  <div class="col с2">
+                      <hr>
+                      <h5>
+                          Список вашей недвижимости, которую вы арендовали
+                      </h5>
+                      <div id="listFlat2">
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
 </body>
 </html>

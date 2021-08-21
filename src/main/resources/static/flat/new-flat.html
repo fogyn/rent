@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NewFlat</title>
+  <script src="../js/flat.js" ></script>
+
+</head>
+<body>
+<p>Новая недвижимость</p>
+<form name="form" >
+  <label>Название</label>
+  <input type="text" id="Name" required/><br />
+  <label>Адрес: </label>
+  <input type="text" id="Address" required/><br />
+  <label>Город: </label>
+  <input type="text" id="City" required/><br />
+  <label>Страна: </label>
+  <input type="text" id="Country" required/><br />
+  <label>Описание: </label>
+  <textarea type="text" id="Description" style="width: 200px; height: 100px"></textarea><br/>
+  <label>Price: </label>
+  <input type="number" id="Price" required/><br />
+  <label>Фото: </label>
+  <input type="file" id="Img" onchange="previewFile()"><br>
+  <img src="" id="ImgPreview" height="200" alt="Image preview...">
+
+  <input type="button" value="Создать новую недвижимость" onclick="newFlat()"/>
+  <div id="ErrorNewFlat"></div>
+
+
+</form>
+</body>
+</html>

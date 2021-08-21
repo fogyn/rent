@@ -35,7 +35,8 @@ public class Flat {
     @Column(name="flat_rating")
     private long ratingFlat;
 
-    // img ?????
+    @Column(name="img", length = Integer.MAX_VALUE)
+    private String image;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "PersonId")
@@ -114,6 +115,13 @@ public class Flat {
 
     public void setPerson(Person person) {
         this.person = person;
+    }
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 

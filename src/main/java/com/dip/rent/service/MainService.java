@@ -50,7 +50,7 @@ public class MainService {
 
         return person1;
     }
-    public Person todoNewPerson(String name, String country, String city, String address, String password, String phone, String email, byte[] image) {
+    public Person todoNewPerson(String name, String country, String city, String address, String password, String phone, String email, String image) {
         //System.out.println("длина в сервисе - "+image.length);
         Person person = new Person();
         person.setNamePerson(name);
@@ -131,7 +131,7 @@ public class MainService {
     }
 
     public String createNewFlat(String name, String country, String city, String address,
-                                String about, int price, Person person){
+                                String about, int price, Person person, String image){
         System.out.println("id person - "+person.getId());
             Optional<Person> person1 = personRepo.findById(person.getId());
             if(person1.isPresent()){
@@ -144,6 +144,7 @@ public class MainService {
                 flat.setAddressFlat(address);
                 flat.setAbout(about);
                 flat.setPrice(price);
+                flat.setImage(image);
                 flat.setPerson(person1.get());
                 Flat f = flatRepo.save(flat);
 

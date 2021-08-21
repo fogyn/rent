@@ -1,3 +1,4 @@
+let img ='';
 async function loadClientforUpdate(){
     let nameElement = document.getElementById('Name');
     nameElement.value = sessionStorage.getItem('Name');
@@ -20,6 +21,10 @@ async function loadClientforUpdate(){
     let passwordElement = document.getElementById("Password");
     passwordElement.value = sessionStorage.getItem('Password');
 
+    let preview = document.getElementById("ImgPreview");
+    img= sessionStorage.getItem('Img');
+    preview.src = img;
+
 }
 function getClientParameters(){
     let idElement = sessionStorage.getItem('Id');
@@ -32,8 +37,6 @@ function getClientParameters(){
     let passwordElement = document.getElementById("Password");
     let ratingElement = sessionStorage.getItem('Rating');
 
-    alert(idElement);
-
     return {
         id: idElement,
         namePerson: nameElement.value,
@@ -42,8 +45,10 @@ function getClientParameters(){
         addressPerson: addressElement.value,
         phone: phoneElement.value,
         email: emailElement.value,
+        image: img,
         password: passwordElement.value,
-        ratingPerson: ratingElement
+        ratingPerson: ratingElement,
+
     };
 }
 
@@ -61,7 +66,6 @@ async function updatePerson(){
         body: JSON.stringify(updatePerson)
     });
     if(response.ok) {
-        alert("update готов");
         let answer = await response.json();
         sessionStorage.setItem('Id',answer.id);
         sessionStorage.setItem('Name',answer.namePerson);
@@ -72,6 +76,7 @@ async function updatePerson(){
         sessionStorage.setItem('Email',answer.email);
         sessionStorage.setItem('Password',answer.password);
         sessionStorage.setItem('Rating',answer.ratingPerson);
+        sessionStorage.setItem('Img',answer.image);
 
 
 
@@ -83,4 +88,40 @@ async function updatePerson(){
         updateElement.innerText = 'редактирование не удалось!';
     }
 
+}
+function previewFile() {
+    let preview = document.getElementById("ImgPreview");
+    let preview2 = document.getElementById("ImgPreview2");
+    let file    = document.getElementById("Img").files[0];
+    let reader  = new FileReader();
+
+    reader.onloadend = function () {
+        let str = reader.result;
+        //alert(str);
+        //
+        // let imgMas = [];
+        preview.src = str;
+        // for(let i=0;i<str.length;i++){
+        //     let code = str.charCodeAt(i);
+        //     imgMas.push(code);
+        //
+        // }
+        img = str;
+        //
+        // alert(imgMas.length);
+        // alert(imgMas);
+
+        // let str2 = '';
+        // for(i = 0; i<imgMas.length; i++){
+        //     str2 +=String.fromCharCode(imgMas[i]);
+        // }
+        // alert('востановленная строка - '+str2);
+        // preview2.src = str2;
+    }
+
+    if (file) {
+        reader.readAsDataURL(file);
+    } else {
+        preview.src = "";
+    }
 }

@@ -23,14 +23,17 @@
                     <div>
                         <form>
                             <label>Логин-Телефон: </label>
-                            <input type="text" id="Phone" /><br />
+                            <input type="text" id="Phone" required placeholder="Ваше логин-телефон"/><br />
                             <label>Пароль: </label>
-                            <input type="password" id="Password"/><br />
+                            <input type="password" id="Password" required placeholder="Ваш пароль"/><br />
                             <!--<label>Фото: </label>
                             <input type="file" id="image"><br/> -->
                             <input type="button" value="Отправить" onclick="autorizeClient()"/>
                         </form>
                         <div id="ErrorAutentification"></div>
+                    </div>
+                    <div>
+                        <input type="button" onclick="testData()" value="Тестовое заполнение"/>
                     </div>
                 </div>
             </div>

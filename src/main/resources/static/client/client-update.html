@@ -14,19 +14,21 @@
 </h3>
 <form>
     <label>Имя</label>
-    <input type="text" id="Name" /><br />
+    <input type="text" id="Name" required/><br />
     <label>Адрес: </label>
-    <input type="text" id="Address"><br />
+    <input type="text" id="Address" required /><br />
     <label>Город: </label>
-    <input type="text" id="City"><br />
+    <input type="text" id="City" required /><br />
     <label>Страна: </label>
-    <input type="text" id="Country"><br />
+    <input type="text" id="Country" required /><br />
     <label>Телефон: </label>
-    <input type="text" id="Phone" /><br />
+    <input type="text" id="Phone" required/><br />
     <label>email: </label>
-    <input type="text" id="Email" /><br />
+    <input type="text" id="Email" required/><br />
     <label>Пароль: </label>
-    <input type="password" id="Password"/><br />
+    <input type="password" id="Password" required/><br />
+    <input type="file" id="Img" onchange="previewFile()"><br>
+    <img src="" id="ImgPreview" height="200" alt="Image preview...">
     <input type="button" value="OK" onclick="updatePerson()"/>
     <div id="UpdateAnswer"></div>
 </form>

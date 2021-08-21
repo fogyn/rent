@@ -30,7 +30,7 @@ public class MainController {
     @NotFound
     @PostMapping("create-new-person")
     public ResponseEntity<Person> createPerson(@RequestBody Person person) {
-        System.out.println("размер фото - "+person.getImage().length);
+        //System.out.println("размер фото - "+person.getImage().length());
 
         Person personSQL = mainService.todoNewPerson(person.getNamePerson(), person.getCountryPerson(), person.getCityPerson(),
                 person.getAddressPerson(), person.getPassword(), person.getPhone(), person.getEmail(), person.getImage());
@@ -102,7 +102,7 @@ public class MainController {
 
         System.out.println("проверка "+flat.getPerson().getId());
         String answer = mainService.createNewFlat(flat.getNameFlat(), flat.getCountryFlat(), flat.getCityFlat(), flat.getAddressFlat(),
-                flat.getAbout(), flat.getPrice(), flat.getPerson());
+                flat.getAbout(), flat.getPrice(), flat.getPerson(), flat.getImage());
         return ResponseEntity.status(HttpStatus.OK).body(answer);
     }
 

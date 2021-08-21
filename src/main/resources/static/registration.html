@@ -4,30 +4,36 @@
     <meta charset="UTF-8">
     <title>Registration</title>
     <script src="../js/registration.js" ></script>
+    <script src="../base64/base64.js" ></script>
+    <script src="../base64/node_modules.base64-js/base64js.min.js"></script>
 </head>
 <body>
 <p>Регистрация</p>
-<form>
+<form name="form" >
     <label>Имя</label>
-    <input type="text" id="Name" /><br />
+    <input type="text" id="Name" required/><br />
     <label>Адрес: </label>
-    <input type="text" id="Address"><br />
+    <input type="text" id="Address" required/><br />
     <label>Город: </label>
-    <input type="text" id="City"><br />
+    <input type="text" id="City" required/><br />
     <label>Страна: </label>
-    <input type="text" id="Country"><br />
+    <input type="text" id="Country" required/><br />
     <label>Телефон: </label>
-    <input type="text" id="Phone" /><br />
+    <input type="text" id="Phone" required/><br />
     <label>email: </label>
-    <input type="text" id="Email" /><br />
+    <input type="text" id="Email" required/><br />
     <label>Пароль: </label>
-    <input type="password" id="Password"/><br />
+    <input type="password" id="Password" required/><br />
     <label>Фото: </label>
     <!--<input type="file" id="Img"/><br />-->
     <input type="file" id="Img" onchange="previewFile()"><br>
     <img src="" id="ImgPreview" height="200" alt="Image preview...">
+  <!--  <label>Загрузка фото из байт массива: </label>
+   <img src="" id="ImgPreview2" height="200" alt="Image preview..."> -->
 
     <input type="button" value="Отправить" onclick="newPerson()"/>
+
+    <div id="ErrorRegistration"></div>
 
 
 </form>

@@ -38,9 +38,9 @@ public class Person {
     @Column(name="email",unique = true,nullable = false)
     private String email;
 
-    @Lob
-    @Column(name="img")
-    private byte[] image;
+
+    @Column(name="img", length = Integer.MAX_VALUE)
+    private String image;
 
 
     @Column(name="password",nullable = false)
@@ -151,11 +151,11 @@ public class Person {
         this.email = email;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 }

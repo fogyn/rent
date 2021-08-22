@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flat-Update</title>
+    <script src="../js/flat-update.js" ></script>
+</head>
+<body onload="loadFlatByUpdate()">
+  <h1>
+    Редактирование Flat
+  </h1>
+  <h3>
+      Отредактируйте данные, и нажмите - "OK"
+  </h3>
+  <div>
+      <input type="button" value="Назад" onclick="back()">
+  </div>
+  <form>
+      <label>Id</label>
+      <input type="number" id="IdFlat" readonly/><br />
+      <label>Название</label>
+      <input type="text" id="NameFlat" required/><br />
+      <label>Адрес: </label>
+      <input type="text" id="AddressFlat" required/><br />
+      <label>Город: </label>
+      <input type="text" id="CityFlat" required/><br />
+      <label>Страна: </label>
+      <input type="text" id="CountryFlat" required/><br />
+      <label>Описание: </label>
+      <textarea type="text" id="About" style="width: 200px; height: 100px"></textarea><br/>
+      <label>Цена: </label>
+      <input type="number" id="Price" required/><br />
+      <label>Рейтинг: </label>
+      <input type="number" id="RatingFlat" readonly/><br />
+      <label>Фото: </label>
+      <input type="file" id="ImgFlat" onchange="previewFile()"><br>
+      <img src="" id="ImgPreviewFlat" height="200" alt="Image preview...">
+
+      <input type="button" value="OK" onclick="updatePerson()"/>
+      <div id="UpdateAnswer"></div>
+  </form>
+</body>
+</html>

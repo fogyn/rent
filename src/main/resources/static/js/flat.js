@@ -44,7 +44,6 @@ async function newFlat(){
         alert('ошибка добавления данных');
     }
 }
-
 function previewFile() {
 
     let preview = document.getElementById("ImgPreview");
@@ -63,4 +62,13 @@ function previewFile() {
     } else {
         preview.src = "";
     }
+}
+
+
+
+export function editFlat(idFlat){
+    alert('edit - '+idFlat);
+}
+export function deleteFlat(idFlat){
+    alert('delete - '+idFlat);
 }

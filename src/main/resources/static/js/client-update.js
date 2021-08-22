@@ -97,26 +97,8 @@ function previewFile() {
 
     reader.onloadend = function () {
         let str = reader.result;
-        //alert(str);
-        //
-        // let imgMas = [];
         preview.src = str;
-        // for(let i=0;i<str.length;i++){
-        //     let code = str.charCodeAt(i);
-        //     imgMas.push(code);
-        //
-        // }
         img = str;
-        //
-        // alert(imgMas.length);
-        // alert(imgMas);
-
-        // let str2 = '';
-        // for(i = 0; i<imgMas.length; i++){
-        //     str2 +=String.fromCharCode(imgMas[i]);
-        // }
-        // alert('востановленная строка - '+str2);
-        // preview2.src = str2;
     }
 
     if (file) {
@@ -124,4 +106,7 @@ function previewFile() {
     } else {
         preview.src = "";
     }
+}
+function back(){
+    window.location = "http://localhost:9000/client/client-autentification.html";
 }

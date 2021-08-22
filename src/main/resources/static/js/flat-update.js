@@ -57,9 +57,11 @@ function getFlatParameters(){
         addressFlat: addressFlat.value,
         about: aboutFlat.value,
         price: priceFlat.value,
-        image: imgFlat,
         ratingFlat: ratingFlat.value,
-        person: sessionStorage.getItem('Id')
+        image: imgFlat,
+        person: {
+            id: Number(sessionStorage.getItem('Id'))
+        }
     };
 
 }
@@ -81,5 +83,27 @@ function previewFile() {
         reader.readAsDataURL(file);
     } else {
         preview.src = "";
+    }
+}
+
+async function updateFlat(){
+    let updateFlat = getFlatParameters();
+
+    //
+    let response = await fetch('http://localhost:9000/updateFlat',{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(updateFlat)
+    });
+    if(response.ok) {
+
+        window.location = "http://localhost:9000/client/client-autentification.html";
+    }
+    else{
+        alert('ошибка редактирования данных');
+        let updateElement = document.getElementById('UpdateAnswer');
+        updateElement.innerText = 'редактирование не удалось!';
     }
 }

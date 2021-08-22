@@ -96,15 +96,7 @@ public class MainController {
         //System.out.println("зашел = "+id);
         return ResponseEntity.status(HttpStatus.OK).body(mainService.getAllFlatId(id));
     }
-    @NotFound
-    @PostMapping("create-new_flat")
-    public ResponseEntity<String> createFlat(@RequestBody Flat flat) {
 
-        System.out.println("проверка "+flat.getPerson().getId());
-        String answer = mainService.createNewFlat(flat.getNameFlat(), flat.getCountryFlat(), flat.getCityFlat(), flat.getAddressFlat(),
-                flat.getAbout(), flat.getPrice(), flat.getPerson(), flat.getImage());
-        return ResponseEntity.status(HttpStatus.OK).body(answer);
-    }
 
 
 

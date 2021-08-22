@@ -12,6 +12,9 @@
 <h3>
     Отредактируйте данные, и нажмите - "OK"
 </h3>
+<div>
+    <input type="button" value="Назад" onclick="back()">
+</div>
 <form>
     <label>Имя</label>
     <input type="text" id="Name" required/><br />
@@ -27,6 +30,7 @@
     <input type="text" id="Email" required/><br />
     <label>Пароль: </label>
     <input type="password" id="Password" required/><br />
+
     <input type="file" id="Img" onchange="previewFile()"><br>
     <img src="" id="ImgPreview" height="200" alt="Image preview...">
 

@@ -38,6 +38,20 @@ public class FlatService {
     }
 
     public Flat getFlatById(long idFlat){
+
         return flatRepo.findById(idFlat).get();
     }
+
+    public boolean todoUpdateFlat(Flat flat){
+        try{
+            flatRepo.save(flat);
+            return true;
+        }
+
+        catch (IllegalArgumentException e){
+            return false;
+        }
+
+    }
+
 }

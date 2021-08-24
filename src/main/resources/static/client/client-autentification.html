@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../bootstrap/bootstrap.css">
     <script src="../js/client.js" ></script>
     <script src="../js/flat.js" ></script>
+    <script src="../js/search.js" ></script>
 
 </head>
 <body onload="loadClients()">
@@ -94,6 +95,33 @@
                       <div id="listFlat2">
 
                       </div>
+                  </div>
+              </div>
+              <div class="row r2">
+
+                  <div class="col">
+                      <hr>
+                      <div id="ComandSearch" style="display: flex">
+                          <div>
+                              <input type="button" value="Найти все квартиры" onclick="searchAllFlats()">
+                          </div>
+                          <div>
+                              <input type="button" value="Найти всех владельцев" onclick="searchAllPersons()">
+                          </div>
+                      </div>
+                      <div>
+                          <h5>Результат поиска</h5>
+                          <div id="Rezult">
+
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col">
+                      <hr>
+                      <div id="Detail">
+
+                      </div>
+
                   </div>
               </div>
           </div>

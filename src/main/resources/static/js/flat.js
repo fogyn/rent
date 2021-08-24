@@ -58,12 +58,3 @@ function previewFile(){
         preview.src = "";
     }
 }
-
-
-
-// export function editFlat(idFlat){
-//     alert('edit - '+idFlat);
-// }
-// export function deleteFlat(idFlat){
-//     alert('delete - '+idFlat);
-// }

@@ -1,4 +1,5 @@
 let imgFlat ='';
+//let token = sessionStorage.getItem('userKey')
 function getFlatParameters(){
 
     let nameFlat = document.getElementById('Name');
@@ -27,10 +28,12 @@ function getFlatParameters(){
 
 async function newFlat(){
     let flat = getFlatParameters();
+    let token = sessionStorage.getItem('userKey')
     let response = await fetch('http://localhost:9000/create-new_flat',{
         method: 'POST',
         headers:{
-            'Content-Type':'application/json;charset=utf-8'
+            'Content-Type':'application/json;charset=utf-8',
+            Authorization:token
         },
         body: JSON.stringify(flat)
     });

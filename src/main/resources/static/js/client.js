@@ -1,6 +1,7 @@
 //import * as flat from './flat.js';
 //import {deleteFlat, editFlat} from "./flat";
 let varFlat = require('./flat')
+//var token1 = sessionStorage.getItem('userKey')
 
 async function loadClients(){
     let nameElementSpan = document.getElementById('NameSpan');
@@ -43,7 +44,18 @@ async function loadClients(){
 
 //запрос списка недвижимости
 async function loadFlats(id){
-    let response = await fetch('http://localhost:9000/flatByPerson//'+Number(id));
+    let token = sessionStorage.getItem('userKey')
+    alert(token)
+    let response = await fetch('http://localhost:9000/flatByPerson//'+Number(id), {
+
+        headers:{
+            Authorization:token
+        }
+
+    });
+
+
+
     if(response.ok){
         alert('пришел');
         let resp = [];
@@ -163,12 +175,19 @@ async function loadFlats(id){
 }
 
 async function deletePerson(){
-
+    let token = sessionStorage.getItem('userKey')
     //alert(sessionStorage.getItem('Id'));
-    let response = await fetch("http://localhost:9000/deletePerson/"+Number(sessionStorage.getItem('Id')));
+    let response = await fetch("http://localhost:9000/deletePerson/"+Number(sessionStorage.getItem('Id')),{
+
+        headers:{
+            Authorization:token
+        }
+
+    });
 
 
     if(response.ok){
+        sessionStorage.removeItem('userKey')
         window.location = "http://localhost:9000";
     }
     else{
@@ -181,8 +200,15 @@ function updatePerson(){
     window.location = "http://localhost:9000/client/client-update.html";
 }
 async function editFlat(idFlat){
+    let token = sessionStorage.getItem('userKey')
     alert('edit - '+idFlat);
-    let response = await fetch("http://localhost:9000/getFlatById/"+Number(idFlat));
+    let response = await fetch("http://localhost:9000/getFlatById/"+Number(idFlat), {
+
+        headers:{
+            Authorization:token
+        }
+
+    });
 
     if(response.ok){
         alert("запрос на редактирование ok");
@@ -207,8 +233,15 @@ async function editFlat(idFlat){
 
 }
 async function deleteFlat(idFlat){
+    let token = sessionStorage.getItem('userKey')
     alert('delete - '+idFlat);
-    let response = await fetch("http://localhost:9000/deleteFlatById/"+Number(idFlat));
+    let response = await fetch("http://localhost:9000/deleteFlatById/"+Number(idFlat), {
+
+        headers:{
+            Authorization:token
+        }
+
+    });
 
     if(response.ok){
         location.reload();

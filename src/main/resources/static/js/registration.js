@@ -39,8 +39,8 @@ async function newPerson(){
     });
     if(response.ok) {
         alert("регистрация ok");
-        let answer = await response.json();
-
+        let answerServ = await response.json();
+        let answer = answerServ.person
         sessionStorage.setItem('Id',answer.id);
         sessionStorage.setItem('Name',answer.namePerson);
         sessionStorage.setItem('Address',answer.addressPerson);
@@ -51,6 +51,9 @@ async function newPerson(){
         sessionStorage.setItem('Password',answer.password);
         sessionStorage.setItem('Rating',answer.ratingPerson);
         sessionStorage.setItem('Img',answer.image);
+        sessionStorage.setItem('userKey', answerServ.token)
+        //alert(answerServ.token)
+        //alert(sessionStorage.getItem('userKey'))
 
         window.location = "http://localhost:9000/client/client-autentification.html";
     }

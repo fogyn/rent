@@ -11,6 +11,7 @@ function getClientParameters(){
 }
 
 async function autorizeClient(){
+    sessionStorage.removeItem('userKey');
     let clientAutentification = getClientParameters();
     //client.id =0;
     let response = await fetch('http://localhost:9000/autentification',{
@@ -22,7 +23,9 @@ async function autorizeClient(){
     });
     if(response.ok) {
         alert("аутентификация ok");
-        let answer = await response.json();
+        //let answer = await response.json();
+         let answerServ = await response.json();
+         let answer = answerServ.person
         sessionStorage.setItem('Id',answer.id);
         sessionStorage.setItem('Name',answer.namePerson);
         sessionStorage.setItem('Address',answer.addressPerson);
@@ -33,6 +36,10 @@ async function autorizeClient(){
         sessionStorage.setItem('Password',answer.password);
         sessionStorage.setItem('Rating',answer.ratingPerson);
         sessionStorage.setItem('Img',answer.image);
+        sessionStorage.setItem('userKey', answerServ.token)
+        //alert(answerServ.token)
+        //alert(sessionStorage.getItem('userKey'))
+        //alert(answerServ.token)
 
 
 
@@ -72,7 +79,7 @@ async function testData(){
         alert("регистрация0 !!! ok");
    }
     else{
-        alert('ошибка добавления данных при создании пользователя0');
+        alert('ошибка добавления данных при создании пользователя 0');
     }
     //создаем клиента с 1 объектами недвижимости
     let client = {
@@ -96,9 +103,10 @@ async function testData(){
     });
     if(response.ok) {
         //alert("регистрация1 !!! ok");
-
-        let answer2 = await response.json();
-        //alert(answer2.id);
+        let answerServ = await response.json();
+        let answer2 = answerServ.person
+       let token = answerServ.token;
+        alert(token);
 
         let flat = {
             nameFlat:"name-flat",
@@ -117,7 +125,8 @@ async function testData(){
         let response2 = await fetch('http://localhost:9000/create-new_flat',{
             method: 'POST',
             headers:{
-                'Content-Type':'application/json;charset=utf-8'
+                'Content-Type':'application/json;charset=utf-8',
+                Authorization:answerServ.token
             },
             body: JSON.stringify(flat)
         });
@@ -125,12 +134,12 @@ async function testData(){
             //alert("flat !!! ok");
         }
         else{
-            alert('ошибка добавления данных при добавлении объекта недвижимости');
+            alert('ошибка добавления данных при добавлении объекта недвижимости 2');
         }
 
     }
     else{
-        alert('ошибка добавления данных при создании пользователя');
+        alert('ошибка добавления данных при создании пользователя 2');
     }
     //создаем клиента с 5 объектами недвижимости
     let client2 = {
@@ -154,8 +163,10 @@ async function testData(){
     });
     if(response3.ok) {
         //alert("регистрация13 !!! ok");
-
-        let answer3 = await response3.json();
+        let answerServ = await response3.json();
+        let answer3 = answerServ.person
+        let token3 = answerServ.token;
+        alert(token3)
         for(i=0;i<5;i++){
             let flat1 = {
                 nameFlat:"name-flat"+i,
@@ -174,7 +185,8 @@ async function testData(){
             let response31 = await fetch('http://localhost:9000/create-new_flat',{
                 method: 'POST',
                 headers:{
-                    'Content-Type':'application/json;charset=utf-8'
+                    'Content-Type':'application/json;charset=utf-8',
+                    Authorization: token3
                 },
                 body: JSON.stringify(flat1)
             });
@@ -182,7 +194,7 @@ async function testData(){
                // alert("flat !!! ok - "+i);
             }
             else{
-                alert('ошибка добавления данных при добавлении объекта недвижимости');
+                alert('ошибка добавления данных при добавлении объекта недвижимости 3');
             }
         }
 
@@ -190,6 +202,6 @@ async function testData(){
 
     }
     else{
-        alert('ошибка добавления данных при создании пользователя');
+        alert('ошибка добавления данных при создании пользователя 3');
     }
 }

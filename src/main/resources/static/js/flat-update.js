@@ -1,4 +1,5 @@
 let imgFlat ='';
+//let token = sessionStorage.getItem('userKey')
 async function loadFlatByUpdate(){
     alert("зашли на апдате");
 
@@ -88,12 +89,13 @@ function previewFile() {
 
 async function updateFlat(){
     let updateFlat = getFlatParameters();
-
+    let token = sessionStorage.getItem('userKey')
     //
     let response = await fetch('http://localhost:9000/updateFlat',{
         method: 'POST',
         headers:{
-            'Content-Type':'application/json;charset=utf-8'
+            'Content-Type':'application/json;charset=utf-8',
+            Authorization:token
         },
         body: JSON.stringify(updateFlat)
     });

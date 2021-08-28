@@ -1,8 +1,16 @@
+//var token = sessionStorage.getItem('userKey')
+
 async function searchAllFlats(){
     let detail = document.getElementById('Detail');
     detail.textContent='';
+    let token = sessionStorage.getItem('userKey');
+    let response = await fetch("http://localhost:9000/searchAllFlat/"+Number(sessionStorage.getItem('Id')),{
 
-    let response = await fetch("http://localhost:9000/searchAllFlat/"+Number(sessionStorage.getItem('Id')));
+        headers:{
+            Authorization:token
+        }
+
+    });
     let rezult = document.getElementById('Rezult');
     rezult.textContent = '';
     rezult.style.border='1px solid black';
@@ -121,7 +129,14 @@ async function searchAllFlats(){
     }
 }
 async function searchAllPersons(){
-    let response = await fetch("http://localhost:9000/searchAllPerson/"+Number(sessionStorage.getItem('Id')));
+    let token = sessionStorage.getItem('userKey');
+    let response = await fetch("http://localhost:9000/searchAllPerson/"+Number(sessionStorage.getItem('Id')),{
+
+        headers:{
+            Authorization:token
+        }
+
+    });
     let rezult = document.getElementById('Rezult');
     let detail = document.getElementById('Detail');
 
@@ -258,11 +273,18 @@ function getPerson(person){
     //
 }
 async function getFlats(id){
+    let token = sessionStorage.getItem('userKey');
     alert('зашел 11111 - '+id);
     let detailPerson = document.getElementById('Detail');
     detailPerson.textContent = '';
 
-    let response = await fetch('http://localhost:9000/flatByPerson//'+Number(id));
+    let response = await fetch('http://localhost:9000/flatByPerson//'+Number(id), {
+
+        headers:{
+            Authorization:token
+        }
+
+    });
     if(response.ok) {
         let resp = await response.json();
         let list = document.createElement('div');

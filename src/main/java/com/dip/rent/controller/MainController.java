@@ -3,6 +3,8 @@ package com.dip.rent.controller;
 import com.dip.rent.AutentificationDTO;
 import com.dip.rent.model.Flat;
 import com.dip.rent.model.Person;
+import com.dip.rent.model.response.AuthorizationResponse;
+import com.dip.rent.security.JwtTokenService;
 import com.dip.rent.service.MainService;
 import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class MainController {
     @Autowired
     private MainService mainService;
     //private PersonRepo personRep;
+    @Autowired
+    private JwtTokenService jwt;
 
     @NotFound
     @GetMapping("create-person")
@@ -29,12 +33,11 @@ public class MainController {
     }
     @NotFound
     @PostMapping("create-new-person")
-    public ResponseEntity<Person> createPerson(@RequestBody Person person) {
-        //System.out.println("размер фото - "+person.getImage().length());
+    public ResponseEntity<AuthorizationResponse> createPerson(@RequestBody Person person) {
 
         Person personSQL = mainService.todoNewPerson(person.getNamePerson(), person.getCountryPerson(), person.getCityPerson(),
                 person.getAddressPerson(), person.getPassword(), person.getPhone(), person.getEmail(), person.getImage());
-        return ResponseEntity.status(HttpStatus.OK).body(personSQL);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AuthorizationResponse(personSQL,jwt.generateToken(personSQL)));
     }
 
     @NotFound
@@ -44,19 +47,36 @@ public class MainController {
         Person personSQL = mainService.todoUpdatePerson(person);
         return ResponseEntity.status(HttpStatus.OK).body(personSQL);
     }
-    @NotFound
-    @PostMapping("autentification")
-    public ResponseEntity<Person> autentificationPerson(@RequestBody AutentificationDTO autentificationDTO) {
+//    @NotFound
+//    @PostMapping("autentification")
+//    public ResponseEntity<Person> autentificationPerson(@RequestBody AutentificationDTO autentificationDTO) {
+//
+//
+//        Person personSQL = mainService.getPersonAutentification(autentificationDTO.getLogin(), autentificationDTO.getPassword());
+//        if(personSQL!=null){
+//            return ResponseEntity.status(HttpStatus.OK).body(personSQL);
+//        }
+//        else {
+//            return ResponseEntity.status(HttpStatus.FOUND).body(new Person());
+//        }
+//
+//    }
 
+    @PostMapping("autentification")
+    public ResponseEntity<AuthorizationResponse> authorize(@RequestBody AutentificationDTO autentificationDTO){
 
         Person personSQL = mainService.getPersonAutentification(autentificationDTO.getLogin(), autentificationDTO.getPassword());
         if(personSQL!=null){
-            return ResponseEntity.status(HttpStatus.OK).body(personSQL);
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AuthorizationResponse(personSQL,jwt.generateToken(personSQL)));
         }
         else {
-            return ResponseEntity.status(HttpStatus.FOUND).body(new Person());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
+//        AbstractServiceUserServiceModel user = authorizationService.authorize(authorizationRequest.getPhone(),authorizationRequest.getPassword());
+//        if(user==null)
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//        return ResponseEntity.status(HttpStatus.ACCEPTED).body(new AuthorizationResponse(user,jwtTokenService.generateToken(user)));
     }
 
     @NotFound
@@ -66,6 +86,7 @@ public class MainController {
         System.out.println("id - "+id);
 
         if(mainService.deletePerson(id)){
+
             return ResponseEntity.status(HttpStatus.OK).body(true);
         }
         else {

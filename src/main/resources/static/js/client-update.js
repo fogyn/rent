@@ -1,4 +1,5 @@
 let img ='';
+//let token = sessionStorage.getItem('userKey')
 async function loadClientforUpdate(){
     let nameElement = document.getElementById('Name');
     nameElement.value = sessionStorage.getItem('Name');
@@ -56,12 +57,13 @@ function getClientParameters(){
 async function updatePerson(){
 
     let updatePerson = getClientParameters();
-
+    let token = sessionStorage.getItem('userKey')
     //
     let response = await fetch('http://localhost:9000/updatePerson',{
         method: 'POST',
         headers:{
-            'Content-Type':'application/json;charset=utf-8'
+            'Content-Type':'application/json;charset=utf-8',
+            Authorization:token
         },
         body: JSON.stringify(updatePerson)
     });

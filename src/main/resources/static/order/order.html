@@ -3,10 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <title>Order</title>
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="../js/order.js" ></script>
 </head>
-<body>
+<body onload="loadOrder()">
 <h1>
     Делаем заказ
 </h1>
+<div>
+    <input type="button" value="Назад" onclick="back()">
+</div>
+
+<section class="network" style="margin-top: 100px">
+    <div class="container">
+        <div class="row r0" style="display: flex">
+            <div class="col-4" style="margin-left: 50px; margin-right: auto;">
+                <div>
+                    <h3>
+                        Данные по недвижимости
+                    </h3>
+
+                    <div>
+                        <label>IdFlat</label>
+                        <div id="IdFlat"></div>
+                        <label>Название</label>
+                        <div id="NameFlat"></div>
+                        <label>Адрес: </label>
+                        <div id="AddressFlat"></div>
+                        <label>Город: </label>
+                        <div id="CityFlat"></div>
+                        <label>Страна: </label>
+                        <div id="CountryFlat"></div>
+                        <label>Описание: </label>
+                        <textarea type="text" id="About" style="width: 200px; height: 100px"></textarea><br/>
+                        <label>Цена: </label>
+                        <div id="Price"></div>
+                        <label>Рейтинг: </label>
+                        <div id="RatingFlat"></div>
+                        <label>Фото: </label>
+                        <img src="" id="ImgPreviewFlat" height="200" alt="Image preview...">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-4" style="margin-right: auto;">
+                <div>
+                    <h3>
+                        Данные по владельцу
+                    </h3>
+                    <div>
+                        <div style="display: flex">
+                            <label>Id - </label>
+                            <div id="Id"></div>
+                        </div>
+                        <div style="display: flex">
+                            <label>Имя - </label>
+                            <div id="Name"></div>
+                        </div>
+                        <div style="display: flex">
+                            <label>Адрес - </label>
+                            <div id="Address"></div>
+                        </div>
+                        <div style="display: flex">
+                            <label>Город - </label>
+                            <div id="City"></div>
+                        </div>
+                        <div style="display: flex">
+                            <label>Страна - </label>
+                            <div id="Country"></div>
+                        </div>
+                        <div style="display: flex">
+                            <label>Телефон - </label>
+                            <div id="Phone" ></div>
+                        </div>
+                        <div style="display: flex">
+                            <label>email - </label>
+                            <div id="Email" ></div>
+                        </div>
+                        <div style="display: flex">
+                            <label>Пароль - </label>
+                            <div id="Password"></div>
+                        </div>
+                        <div style="display: flex">
+                            <label>Рейтинг - </label>
+                            <div id="Rating"></div>
+                        </div>
+                        <div style="display: flex">
+                            <label>Image - </label>
+                            <img src="" id="ImgPreview" height="200" alt="Image preview...">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-4" style="margin-left: 50px; margin-right: auto;">
+                <div>
+                    <h3>
+                        Данные по занятости квартиры
+                    </h3>
+                    <div id="ListFlatDate"></div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row r1">
+            <div class="col">
+                <div>
+                    <h1>
+                        Заказ по недвижимости <span id="FlatOrderId"></span>
+                    </h1>
+                    <div>
+                        <form>
+                            <label>С какой даты: </label>
+                            <input type="date" id="DateOn" required placeholder="начальная дата"/><br />
+                            <label>По какую даты: </label>
+                            <input type="date" id="DateOff" required placeholder="Конечная дата"/><br />
+                            <label>Общая стоимость: </label>
+                            <div id="AllPrice"></div>
+                            <input type="button" value="Отправить" onclick="newOrder"/>
+                        </form>
+                        <div id="ErrorAutentification"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>

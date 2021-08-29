@@ -378,4 +378,6 @@ async function getFlats(id){
 
 function getOrder(idFlat){
     window.location="http://localhost:9000/order/order.html?id="+Number(idFlat);
+
+
 }

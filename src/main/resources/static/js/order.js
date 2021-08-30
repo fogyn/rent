@@ -35,9 +35,11 @@ async function loadOrder(){
         });
 
         if(responseOrder.ok){
-            let list = responseOrder.json();
+            let list = await responseOrder.json();
             alert("список пришел");
             let orders = document.getElementById("ListFlatDate");
+            alert(list.value);
+
             if(list.length>0){
 
 
@@ -178,6 +180,7 @@ async function newOrder(){
     });
     if(response.ok) {
         alert('все ок');
+        //
         window.location = "http://localhost:9000/client/client-autentification.html";
     }
     else{

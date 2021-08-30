@@ -1,3 +1,5 @@
+let token1;
+let token2;
 
 function getClientParameters(){
 
@@ -77,6 +79,9 @@ async function testData(){
     });
     if(response0.ok) {
         alert("регистрация0 !!! ok");
+        let answerServ = await response0.json();
+       // let answer2 = answerServ.person
+        token1 = answerServ.token;
    }
     else{
         alert('ошибка добавления данных при создании пользователя 0');
@@ -106,6 +111,7 @@ async function testData(){
         let answerServ = await response.json();
         let answer2 = answerServ.person
        let token = answerServ.token;
+        token2 = token;
         alert(token);
 
         let flat = {
@@ -203,5 +209,56 @@ async function testData(){
     }
     else{
         alert('ошибка добавления данных при создании пользователя 3');
+    }
+//
+
+    let order1 = {
+        personId: 1,
+        flatId: 1,
+        startDate: new Date(2021, 8, 25),
+        endDate: new Date(2021, 9, 10)
+    }
+    let responseOrder = await fetch('http://localhost:9000/create-new-order',{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            Authorization:token1
+        },
+        body: JSON.stringify(order1)
+    });
+    if(responseOrder.ok) {
+        alert('order добавлен');
+        //
+
+    }
+    else{
+
+        alert('ошибка добавления данных при создании заказа(order)');
+
+    }
+    //
+    let order2 = {
+        personId: 2,
+        flatId: 2,
+        startDate: new Date(2021, 8, 30),
+        endDate: new Date(2021, 9, 20)
+    }
+    let responseOrder2 = await fetch('http://localhost:9000/create-new-order',{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            Authorization:token2
+        },
+        body: JSON.stringify(order2)
+    });
+    if(responseOrder2.ok) {
+        alert('order2 добавлен');
+        //
+
+    }
+    else{
+
+        alert('ошибка добавления данных при создании заказа(order2)');
+
     }
 }

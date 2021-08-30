@@ -38,9 +38,9 @@ async function loadClients(){
     let str2 = sessionStorage.getItem('Img');
     preview.src = str2;
 
-   loadFlats(sessionStorage.getItem('Id'));
-   loadOrder2(sessionStorage.getItem('Id'));
-   loadOrder3(sessionStorage.getItem('ListFlatId'));
+   await loadFlats(sessionStorage.getItem('Id'));
+   await loadOrder2(sessionStorage.getItem('Id'));
+   await loadOrder3(sessionStorage.getItem('ListFlatId'));
 
 }
 
@@ -63,12 +63,6 @@ async function loadFlats(id){
         let resp = [];
         resp = await response.json();
         let listFlatId = [];
-        // for(let flat in resp){
-        //     listFlatId.push(flat.idFlat)
-        // }
-        //
-        // sessionStorage.setItem('ListFlatId', listFlatId);
-
 
         alert('размер массива - '+resp.length);
         //return resp;
@@ -92,6 +86,7 @@ async function loadFlats(id){
             for(let i=0;i<resp.length;i++) {
                 //div - ячейка для данных по 1 кв
                 listFlatId.push(resp[i].idFlat);
+                //alert("формируемый массив - "+listFlatId.length);
                 let div1 = document.createElement('div');
                 div1.style.display="flex";
                 div1.style.border="1px solid blue";
@@ -177,11 +172,14 @@ async function loadFlats(id){
 
         }
         else{
+            //sessionStorage.setItem('ListFlatId', listFlatId);
             let list = document.getElementById('ListFlat');
             list.innerText = 'Список пуст';
+            sessionStorage.setItem('ListFlatId', 0);
         }
 
-        alert(listFlatId.length);
+        //alert("созданный массив id - "+listFlatId.length);
+        //sessionStorage.setItem('ListFlatId', listFlatId);
     }
     else{
         alert('Ошибка');
@@ -260,8 +258,7 @@ async function deleteFlat(idFlat){
 
     if(response.ok){
         location.reload();
-        //location.href=location.href;
-    }
+        }
     else{
         let deleteElement = document.getElementById('InformFlat');
         deleteElement.innerText = 'удаление не удалось!';
@@ -270,10 +267,102 @@ async function deleteFlat(idFlat){
 // я арендовал - мой id
 async function loadOrder2(personId){
     alert("заказчик по id!!!!!!!!!!!!!="+personId)
+    let token = sessionStorage.getItem('userKey');
 
+    let personDTO = {
+        idPerson: Number(personId),
+        dateBoolean: true
+    }
+
+    let responseOrder = await fetch('http://localhost:9000/orderByPerson',{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            Authorization:token
+        },
+        body: JSON.stringify(personDTO)
+    });
+
+    if(responseOrder.ok){
+        let list = await responseOrder.json();
+        //alert("список пришел");
+        let orderPerson = document.getElementById('listFlat2');
+        //alert(list.value);
+
+        if(list.length>0){
+
+
+            orderPerson.innerText = 'число недвижимости которую вы заказали = '+Number(list.length);
+        }
+        else{
+
+            orderPerson.innerText = "Список ваших заказов пуст.";
+        }
+    }
+    else{
+        alert("где то ошибка")
+    }
 }
 // арендовали у меня - список id моих flat
 async function loadOrder3(listFlatId){
-    alert("список недвижимости !!!!!!!!!- "+listFlatId.length)
+    let listId = [];
+    //alert(listFlatId);
+    if(Number(listFlatId)===0){
+        alert("список недвижимости 0000000 - "+listFlatId);
+        let orderFlat = document.getElementById('listFlat3');
+        orderFlat.innerText = "Список заказов на вашу недвижимость пуст.";
+    }
+    else{
+        let mas = listFlatId.split(",");
+
+        for(let i=0; i<mas.length;i++){
+            console.log(mas[i]);
+            listId.push(Number(mas[i]));
+        }
+        alert("список недвижимости !!!!!!!!!- "+listId .length)
+//
+
+
+        let token = sessionStorage.getItem('userKey');
+
+// нужен список всех квартир
+        let orderDTO = {
+            listFlatId: listId,
+            dateBoolean: true
+        }
+
+        let responseOrder = await fetch('http://localhost:9000/orderByFlats',{
+            method: 'POST',
+            headers:{
+                'Content-Type':'application/json;charset=utf-8',
+                Authorization:token
+            },
+            body: JSON.stringify(orderDTO)
+        });
+
+        if(responseOrder.ok){
+            let list = await responseOrder.json();
+            //alert("список пришел");
+            let orderFlat = document.getElementById('listFlat3');
+            //alert(list.value);
+
+            if(list.length>0){
+
+
+                orderFlat.innerText = "число недвижимости заказанной у вас = "+Number(list.length);
+            }
+            else{
+
+                orderFlat.innerText = "Список заказов на вашу недвижимость пуст.";
+            }
+        }
+        else{
+            alert("где то ошибка")
+        }
+
+
+
+    }
+
 
 }

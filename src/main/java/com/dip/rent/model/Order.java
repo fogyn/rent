@@ -27,13 +27,13 @@ public class Order {
 //    @Column(name = "state",nullable = false)
 //    private StateEnum state;
 
-    @Column(name = "start_Date",nullable = false)
+    @Column(name = "startDate",nullable = false)
     private Date startDate;
 
 //    @Column(name = "plane_end_Date",nullable = false)
 //    private Date planeEndDate;
 
-    @Column(name = "end_Date")
+    @Column(name = "endDate")
     private Date endDate;
 
 //    @OneToOne(cascade = CascadeType.PERSIST)

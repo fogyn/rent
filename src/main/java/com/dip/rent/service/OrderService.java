@@ -2,6 +2,7 @@ package com.dip.rent.service;
 
 import com.dip.rent.model.Order;
 import com.dip.rent.model.response.OrderByFlatListDTO;
+import com.dip.rent.model.response.OrdersByPersonDTO;
 import com.dip.rent.repo.FlatRepo;
 import com.dip.rent.repo.OrderRepo;
 import com.dip.rent.repo.PersonRepo;
@@ -29,34 +30,53 @@ public class OrderService {
         return orderRepo.save(order);
     }
     //аренда которую сделал пользователь
-//    public List<Order> getAllOrderByPerson(OrdersByPersonDTO dtoByPerson){
-//        List<Order> listOrders;
-//        if(dtoByPerson.getDateNow() == null){
-//            listOrders = orderRepo.findOrderByPersonId(dtoByPerson.getIdPerson());
-//        }
-//        else{
-//            listOrders = orderRepo.findOrderByPersonIdAndDate(dtoByPerson.getIdPerson(), dtoByPerson.getDateNow());
-//        }
-//
-//        return listOrders;
-//    }
+    public List<Order> getAllOrderByPerson(OrdersByPersonDTO dtoByPerson){
+        List<Order> listOrders;
+        if(!dtoByPerson.isDateBoolean()){
+            listOrders = orderRepo.getAllOrderByPersonId(dtoByPerson.getIdPerson());
+        }
+        else{
+            Date date = new Date();
+            //listOrders = orderRepo.findOrderByPersonIdAndDate(dtoByPerson.getIdPerson(), date);
+            listOrders = orderRepo.getAllOrderByPersonId(dtoByPerson.getIdPerson());
+        }
+
+        return listOrders;
+    }
 //// заказы которые сделали по недвижимости пользователя
     public List<Order> getAllOrderByFlats(OrderByFlatListDTO ordersDTO){
         List<Order> listOrders = new ArrayList<>();
         if(!ordersDTO.isDateBoolean()){
+            System.out.println("без даты");
             for(Long i:ordersDTO.getListFlatId()){
-                List<Order> l = (List<Order>) orderRepo.getAllOrderByFlatId(i);
+                List<Order> l = orderRepo.getAllOrderByFlatId(i);
                 listOrders.addAll(l);
             }
         }
         else{
+            System.out.println("с датой");
             for(Long i:ordersDTO.getListFlatId()){
                 Date date = new Date();
+                //Date date1 = new Date();
                 System.out.println(date);
-                List<Order> l = orderRepo.getAllByFlatIdAndEndDate(i, date);
-                listOrders.addAll(l);
+                System.out.println(i);
+                //List<Order> l = orderRepo.getAllOrderByEndDate(date);
+                List<Order> l = orderRepo.getAllOrderByFlatId(i);
+                if(l.size()>0){
+                    System.out.println(l.get(0).getOrderId());
+                    System.out.println(l.get(0).getPersonId());
+                    System.out.println(l.get(0).getFlatId());
+                    System.out.println(l.get(0).getStartDate());
+                    System.out.println(l.get(0).getEndDate());
+                    listOrders.addAll(l);
+                }
+                else{
+                    System.out.println("выборка пуста");
+                }
+
             }
         }
+        System.out.println(listOrders.size());
         return listOrders;
     }
 }

@@ -16,27 +16,33 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
 
+
+
+    @Column(name = "person_id",nullable = false)
+    private long personId;
+
     @Column(name = "flat_id",nullable = false)
     private long flatId;
 
-//    @Column(name = "person_id",nullable = false)
-//    private long personId;
+//    @Column(name = "state",nullable = false)
+//    private StateEnum state;
 
-    @Column(name = "state",nullable = false)
-    private StateEnum state;
-
-    @Column(name = "startDate",nullable = false)
+    @Column(name = "start_Date",nullable = false)
     private Date startDate;
 
-    @Column(name = "plane_end_Date",nullable = false)
-    private Date planeEndDate;
+//    @Column(name = "plane_end_Date",nullable = false)
+//    private Date planeEndDate;
 
-    @Column(name = "endDate")
+    @Column(name = "end_Date")
     private Date endDate;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "PersonId")
-    private Person person;
+//    @OneToOne(cascade = CascadeType.PERSIST)
+//    @JoinColumn(name = "FlatId")
+//    private Flat flat;
+
+//    @OneToOne(cascade = CascadeType.PERSIST)
+//    @JoinColumn(name = "PersonId")
+//    private Person person;
 //
     public Order() {}
 
@@ -49,13 +55,13 @@ public class Order {
     }
 
 
-    public StateEnum getState() {
-        return state;
-    }
-
-    public void setState(StateEnum state) {
-        this.state = state;
-    }
+//    public StateEnum getState() {
+//        return state;
+//    }
+//
+//    public void setState(StateEnum state) {
+//        this.state = state;
+//    }
 
     public Date getStartDate() {
         return startDate;
@@ -65,13 +71,13 @@ public class Order {
         this.startDate = startDate;
     }
 
-    public Date getPlaneEndDate() {
-        return planeEndDate;
-    }
-
-    public void setPlaneEndDate(Date planeEndDate) {
-        this.planeEndDate = planeEndDate;
-    }
+//    public Date getPlaneEndDate() {
+//        return planeEndDate;
+//    }
+//
+//    public void setPlaneEndDate(Date planeEndDate) {
+//        this.planeEndDate = planeEndDate;
+//    }
 
     public Date getEndDate() {
         return endDate;
@@ -81,13 +87,13 @@ public class Order {
         this.endDate = endDate;
     }
 
-    public long getFlatId() {
-        return flatId;
-    }
-
-    public void setFlatId(long flatId) {
-        this.flatId = flatId;
-    }
+//    public long getFlatId() {
+//        return flatId;
+//    }
+//
+//    public void setFlatId(long flatId) {
+//        this.flatId = flatId;
+//    }
 
 //    public long getPersonId() {
 //        return personId;
@@ -97,11 +103,36 @@ public class Order {
 //        this.personId = personId;
 //    }
 
-    public Person getPerson() {
-        return person;
+//    public Person getPerson() {
+//        return person;
+//    }
+//
+//    public void setPerson(Person person) {
+//        this.person = person;
+//    }
+//
+//    public Flat getFlat() {
+//        return flat;
+//    }
+//
+//    public void setFlat(Flat flat) {
+//        this.flat = flat;
+//    }
+
+
+    public long getPersonId() {
+        return personId;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPersonId(long personId) {
+        this.personId = personId;
+    }
+
+    public long getFlatId() {
+        return flatId;
+    }
+
+    public void setFlatId(long flatId) {
+        this.flatId = flatId;
     }
 }

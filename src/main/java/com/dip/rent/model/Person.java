@@ -53,9 +53,9 @@ public class Person {
     @JsonIgnore
     private List<Flat> flats;
 
-    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Order> orders;
+//    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    private List<Order> orders;
 
     /**
      * Конструктор.
@@ -135,13 +135,13 @@ public class Person {
         this.flats = flats;
     }
 
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
+//    public List<Order> getOrders() {
+//        return orders;
+//    }
+//
+//    public void setOrders(List<Order> orders) {
+//        this.orders = orders;
+//    }
 
     public String getEmail() {
         return email;

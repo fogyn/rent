@@ -39,6 +39,8 @@ async function loadClients(){
     preview.src = str2;
 
    loadFlats(sessionStorage.getItem('Id'));
+   loadOrder2(sessionStorage.getItem('Id'));
+   loadOrder3(sessionStorage.getItem('ListFlatId'));
 
 }
 
@@ -60,9 +62,18 @@ async function loadFlats(id){
         alert('пришел');
         let resp = [];
         resp = await response.json();
+        let listFlatId = [];
+        // for(let flat in resp){
+        //     listFlatId.push(flat.idFlat)
+        // }
+        //
+        // sessionStorage.setItem('ListFlatId', listFlatId);
+
+
         alert('размер массива - '+resp.length);
         //return resp;
         if(resp.length>0){
+
             let list = document.getElementById('ListFlat');
             list.style.border='1px solid black';
 
@@ -80,6 +91,7 @@ async function loadFlats(id){
 
             for(let i=0;i<resp.length;i++) {
                 //div - ячейка для данных по 1 кв
+                listFlatId.push(resp[i].idFlat);
                 let div1 = document.createElement('div');
                 div1.style.display="flex";
                 div1.style.border="1px solid blue";
@@ -161,12 +173,15 @@ async function loadFlats(id){
 
             }
             list.appendChild(divFlat);
+            sessionStorage.setItem('ListFlatId', listFlatId);
 
         }
         else{
             let list = document.getElementById('ListFlat');
             list.innerText = 'Список пуст';
         }
+
+        alert(listFlatId.length);
     }
     else{
         alert('Ошибка');
@@ -251,4 +266,14 @@ async function deleteFlat(idFlat){
         let deleteElement = document.getElementById('InformFlat');
         deleteElement.innerText = 'удаление не удалось!';
     }
+}
+// я арендовал - мой id
+async function loadOrder2(personId){
+    alert("заказчик по id!!!!!!!!!!!!!="+personId)
+
+}
+// арендовали у меня - список id моих flat
+async function loadOrder3(listFlatId){
+    alert("список недвижимости !!!!!!!!!- "+listFlatId.length)
+
 }

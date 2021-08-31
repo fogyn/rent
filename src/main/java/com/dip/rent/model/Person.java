@@ -53,6 +53,9 @@ public class Person {
     @JsonIgnore
     private List<Flat> flats;
 
+//    @OneToOne(mappedBy = "person", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
+//    private Order order;
+
 //    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 //    @JsonIgnore
 //    private List<Order> orders;
@@ -158,4 +161,12 @@ public class Person {
     public void setImage(String image) {
         this.image = image;
     }
+
+//    public Order getOrder() {
+//        return order;
+//    }
+//
+//    public void setOrder(Order order) {
+//        this.order = order;
+//    }
 }

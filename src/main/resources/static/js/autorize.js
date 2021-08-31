@@ -1,5 +1,6 @@
 let token1;
 let token2;
+let token31;
 
 function getClientParameters(){
 
@@ -112,7 +113,7 @@ async function testData(){
         let answer2 = answerServ.person
        let token = answerServ.token;
         token2 = token;
-        alert(token);
+        //alert(token);
 
         let flat = {
             nameFlat:"name-flat",
@@ -172,7 +173,7 @@ async function testData(){
         let answerServ = await response3.json();
         let answer3 = answerServ.person
         let token3 = answerServ.token;
-        alert(token3)
+        //alert(token3)
         for(i=0;i<5;i++){
             let flat1 = {
                 nameFlat:"name-flat"+i,
@@ -213,10 +214,14 @@ async function testData(){
 //
 
     let order1 = {
-        personId: 1,
-        flatId: 1,
-        startDate: new Date(2021, 8, 25),
-        endDate: new Date(2021, 9, 10)
+        person: {
+            id: 1
+        },
+        flat: {
+            idFlat:1
+        },
+        startDate: new Date(2021, 7, 25),
+        endDate: new Date(2021, 8, 10)
     }
     let responseOrder = await fetch('http://localhost:9000/create-new-order',{
         method: 'POST',
@@ -237,11 +242,44 @@ async function testData(){
 
     }
     //
+    let order3 = {
+        person: {
+            id: 1
+        },
+        flat: {
+            idFlat:1
+        },
+        startDate: new Date(2021, 7, 25),
+        endDate: new Date(2021, 7, 29)
+    }
+    let responseOrder3 = await fetch('http://localhost:9000/create-new-order',{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            Authorization:token1
+        },
+        body: JSON.stringify(order3)
+    });
+    if(responseOrder3.ok) {
+        alert('order3 добавлен');
+        //
+
+    }
+    else{
+
+        alert('ошибка добавления данных при создании заказа(order)');
+
+    }
+    //
     let order2 = {
-        personId: 2,
-        flatId: 2,
-        startDate: new Date(2021, 8, 30),
-        endDate: new Date(2021, 9, 20)
+        person: {
+            id: 2
+        },
+        flat: {
+            idFlat:2
+        },
+        startDate: new Date(2021, 7, 30),
+        endDate: new Date(2021, 8, 20)
     }
     let responseOrder2 = await fetch('http://localhost:9000/create-new-order',{
         method: 'POST',

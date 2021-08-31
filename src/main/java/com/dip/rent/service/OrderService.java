@@ -1,5 +1,6 @@
 package com.dip.rent.service;
 
+import com.dip.rent.model.Flat;
 import com.dip.rent.model.Order;
 import com.dip.rent.model.response.OrderByFlatListDTO;
 import com.dip.rent.model.response.OrdersByPersonDTO;
@@ -9,7 +10,9 @@ import com.dip.rent.repo.PersonRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +26,8 @@ public class OrderService {
     private FlatRepo flatRepo;
 
     public Order todoNewOrder(Order order){
-        return orderRepo.save(order);
+         Order o = orderRepo.save(order);
+        return o;
     }
 
     public Order todoUpdateOrder(Order order){
@@ -31,14 +35,31 @@ public class OrderService {
     }
     //аренда которую сделал пользователь
     public List<Order> getAllOrderByPerson(OrdersByPersonDTO dtoByPerson){
-        List<Order> listOrders;
+        List<Order> listOrders = new ArrayList<>();
         if(!dtoByPerson.isDateBoolean()){
-            listOrders = orderRepo.getAllOrderByPersonId(dtoByPerson.getIdPerson());
+            listOrders = orderRepo.getAllOrderByPerson(dtoByPerson.getPerson());
         }
         else{
             Date date = new Date();
-            //listOrders = orderRepo.findOrderByPersonIdAndDate(dtoByPerson.getIdPerson(), date);
-            listOrders = orderRepo.getAllOrderByPersonId(dtoByPerson.getIdPerson());
+            System.out.println(date);
+            System.out.println("---------");
+            System.out.println(dtoByPerson.getPerson().getId());
+            List<Order> allOrder = (List<Order>) orderRepo.findAll();
+            System.out.println("all - "+allOrder.size());
+            List<Order> l = orderRepo.getAllOrderByPerson(dtoByPerson.getPerson());
+            if(l.size()>0){
+                for(int a=0;a<l.size();a++){
+                    System.out.println(l.get(a).getEndDate());
+                    Date dateNow = new Date();
+                    System.out.println(dateNow);
+                    if(dateNow.compareTo(l.get(a).getEndDate())<0){
+                        listOrders.add(l.get(a));
+                    }
+                }
+            }
+            else{
+                System.out.println("выборка пуста");
+            }
         }
 
         return listOrders;
@@ -48,32 +69,34 @@ public class OrderService {
         List<Order> listOrders = new ArrayList<>();
         if(!ordersDTO.isDateBoolean()){
             System.out.println("без даты");
-            for(Long i:ordersDTO.getListFlatId()){
-                List<Order> l = orderRepo.getAllOrderByFlatId(i);
+            for(Flat flat:ordersDTO.getListFlat()){
+               List<Order> l = orderRepo.getAllOrderByFlat(flat);
                 listOrders.addAll(l);
             }
         }
         else{
-            System.out.println("с датой");
-            for(Long i:ordersDTO.getListFlatId()){
-                Date date = new Date();
-                //Date date1 = new Date();
-                System.out.println(date);
-                System.out.println(i);
-                //List<Order> l = orderRepo.getAllOrderByEndDate(date);
-                List<Order> l = orderRepo.getAllOrderByFlatId(i);
+            for(Flat flat:ordersDTO.getListFlat()){
+                //String dt = new SimpleDateFormat("yyyy-MM-dd").format(date)+" 00:00:00.0";
+                List<Order> l = new ArrayList<>();
+                l = orderRepo.getAllOrderByFlat(flat);
                 if(l.size()>0){
-                    System.out.println(l.get(0).getOrderId());
-                    System.out.println(l.get(0).getPersonId());
-                    System.out.println(l.get(0).getFlatId());
-                    System.out.println(l.get(0).getStartDate());
-                    System.out.println(l.get(0).getEndDate());
-                    listOrders.addAll(l);
+                    System.out.println(l.get(0).getFlat().getPrice());
+//
+                    for(int a=0;a<l.size();a++){
+                        //System.out.println(l.get(a).getEndDate());
+                        Date dateNow = new Date();
+                       // System.out.println(dateNow);
+                        if(dateNow.compareTo(l.get(a).getEndDate())<0){
+                            listOrders.add(l.get(a));
+                        }
+                    }
+//                    listOrders.addAll(l);
+//                    System.out.println("ok");
+
                 }
                 else{
                     System.out.println("выборка пуста");
                 }
-
             }
         }
         System.out.println(listOrders.size());

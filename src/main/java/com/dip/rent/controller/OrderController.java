@@ -20,9 +20,17 @@ public class OrderController {
     @NotFound
     @PostMapping("create-new-order")
     public ResponseEntity<Order> createPerson(@RequestBody Order order) {
-
+        System.out.println(order.getFlat().getIdFlat());
+        System.out.println(order.getPerson().getId());
+        System.out.println(order.getStartDate());
+        System.out.println(order.getEndDate());
+        System.out.println("-------------------");
         Order orderSQL = orderService.todoNewOrder(order);
-        System.out.println(orderSQL.getFlatId());
+        System.out.println(orderSQL.getOrderId());
+        System.out.println(orderSQL.getFlat().getIdFlat());
+        System.out.println(orderSQL.getPerson().getId());
+        System.out.println(orderSQL.getStartDate());
+        System.out.println(orderSQL.getEndDate());
         return ResponseEntity.status(HttpStatus.OK).body(orderSQL);
     }
     //закрытие сделки
@@ -37,16 +45,16 @@ public class OrderController {
     @NotFound
     @PostMapping("orderByPerson")
     public ResponseEntity<List<Order>> getListFlatByPersonId(@RequestBody OrdersByPersonDTO dtoByPerson) {
-        System.out.println("зашел = "+dtoByPerson.isDateBoolean());
-        System.out.println("зашел id= "+dtoByPerson.getIdPerson());
+        //System.out.println("зашел = "+dtoByPerson.isDateBoolean());
+        //System.out.println("зашел id= "+dtoByPerson.getIdPerson());
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getAllOrderByPerson(dtoByPerson));
     }
 //    // возврат списка ордеров для истории - все что заказали у person по - IdFlat
     @NotFound
     @PostMapping("orderByFlats")
     public ResponseEntity<List<Order>> getListFlatByPersonId(@RequestBody OrderByFlatListDTO ordersDTO) {
-        System.out.println("зашел = "+ordersDTO.isDateBoolean());
-        System.out.println("зашел id= "+ordersDTO.getListFlatId().get(0));
+        //System.out.println("зашел = "+ordersDTO.isDateBoolean());
+        //System.out.println("зашел id= "+ordersDTO.getListFlatId().get(0));
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getAllOrderByFlats(ordersDTO));
     }
 }

@@ -34,11 +34,6 @@ public class Filter extends OncePerRequestFilter {
             return;
         }
 
-        //
-//
-        //
-
-
         if(httpServletRequest.getRequestURI().equals("/autentification") ) {
             System.out.println("зашел по аутентификации");
             filterChain.doFilter(httpServletRequest,httpServletResponse);
@@ -46,7 +41,11 @@ public class Filter extends OncePerRequestFilter {
         }
         //|| httpServletRequest.getRequestURI().equals("/create-new-person") ||
         //                httpServletRequest.getRequestURI().equals("/") || httpServletRequest.getRequestURI().equals("/create-new_flat")
-
+//        if(httpServletRequest.getRequestURI().equals("/create-new-order") ) {
+//            System.out.println("зашел по созданию ордера");
+//            filterChain.doFilter(httpServletRequest,httpServletResponse);
+//            return;
+//        }
 
 
         // "Authorization" - ?

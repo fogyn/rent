@@ -20,8 +20,15 @@ async function loadOrder(){
         let person = flat.person;
         getFlat(flat);
         getPerson(person);
+
+        let list = [];
+        let flat1 = {
+            idFlat:Number(idFlat)
+        }
+        list.push(flat1);
+//alert(list[0].idFlat);
         let orderDTO = {
-            listFlatId: [idFlat],
+            listFlat: list,
             dateBoolean: true,
         }
 

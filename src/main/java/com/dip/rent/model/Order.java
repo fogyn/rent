@@ -17,32 +17,17 @@ public class Order {
     private Long orderId;
 
 
+    @OneToOne
+     private Person person;
 
-    @Column(name = "person_id",nullable = false)
-    private long personId;
-
-    @Column(name = "flat_id",nullable = false)
-    private long flatId;
-
-//    @Column(name = "state",nullable = false)
-//    private StateEnum state;
+    @OneToOne
+    private Flat flat;
 
     @Column(name = "startDate",nullable = false)
     private Date startDate;
 
-//    @Column(name = "plane_end_Date",nullable = false)
-//    private Date planeEndDate;
-
     @Column(name = "endDate")
     private Date endDate;
-
-//    @OneToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "FlatId")
-//    private Flat flat;
-
-//    @OneToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "PersonId")
-//    private Person person;
 //
     public Order() {}
 
@@ -54,15 +39,6 @@ public class Order {
         this.orderId = orderId;
     }
 
-
-//    public StateEnum getState() {
-//        return state;
-//    }
-//
-//    public void setState(StateEnum state) {
-//        this.state = state;
-//    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -70,14 +46,6 @@ public class Order {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-
-//    public Date getPlaneEndDate() {
-//        return planeEndDate;
-//    }
-//
-//    public void setPlaneEndDate(Date planeEndDate) {
-//        this.planeEndDate = planeEndDate;
-//    }
 
     public Date getEndDate() {
         return endDate;
@@ -87,52 +55,19 @@ public class Order {
         this.endDate = endDate;
     }
 
-//    public long getFlatId() {
-//        return flatId;
-//    }
-//
-//    public void setFlatId(long flatId) {
-//        this.flatId = flatId;
-//    }
-
-//    public long getPersonId() {
-//        return personId;
-//    }
-//
-//    public void setPersonId(long personId) {
-//        this.personId = personId;
-//    }
-
-//    public Person getPerson() {
-//        return person;
-//    }
-//
-//    public void setPerson(Person person) {
-//        this.person = person;
-//    }
-//
-//    public Flat getFlat() {
-//        return flat;
-//    }
-//
-//    public void setFlat(Flat flat) {
-//        this.flat = flat;
-//    }
-
-
-    public long getPersonId() {
-        return personId;
+    public Flat getFlat() {
+        return flat;
     }
 
-    public void setPersonId(long personId) {
-        this.personId = personId;
+    public void setFlat(Flat flat) {
+        this.flat = flat;
     }
 
-    public long getFlatId() {
-        return flatId;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setFlatId(long flatId) {
-        this.flatId = flatId;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 }

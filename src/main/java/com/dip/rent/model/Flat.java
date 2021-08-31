@@ -42,6 +42,9 @@ public class Flat {
     @JoinColumn(name = "PersonId")
     private Person person;
 
+//    @OneToOne(mappedBy = "flat", cascade = CascadeType.ALL, optional = false, fetch = FetchType.LAZY)
+//    private Order order;
+
     public Flat() {
     }
 
@@ -124,5 +127,11 @@ public class Flat {
         this.image = image;
     }
 
-
+//    public Order getOrder() {
+//        return order;
+//    }
+//
+//    public void setOrder(Order order) {
+//        this.order = order;
+//    }
 }

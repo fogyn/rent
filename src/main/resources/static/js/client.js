@@ -270,7 +270,9 @@ async function loadOrder2(personId){
     let token = sessionStorage.getItem('userKey');
 
     let personDTO = {
-        idPerson: Number(personId),
+        person: {
+            id:Number(personId)
+        },
         dateBoolean: true
     }
 
@@ -316,7 +318,7 @@ async function loadOrder3(listFlatId){
         let mas = listFlatId.split(",");
 
         for(let i=0; i<mas.length;i++){
-            console.log(mas[i]);
+            //console.log(mas[i]);
             listId.push(Number(mas[i]));
         }
         alert("список недвижимости !!!!!!!!!- "+listId .length)
@@ -325,9 +327,17 @@ async function loadOrder3(listFlatId){
 
         let token = sessionStorage.getItem('userKey');
 
+        let list = [];
+        for(let i=0; i<listId.length;i++){
+            let flat = {
+                idFlat:Number(listId[i])
+            }
+            list.push(flat);
+        }
+alert(list.length)
 // нужен список всех квартир
         let orderDTO = {
-            listFlatId: listId,
+            listFlat: list,
             dateBoolean: true
         }
 

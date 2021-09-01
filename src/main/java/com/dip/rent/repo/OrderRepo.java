@@ -36,8 +36,8 @@ public interface OrderRepo extends CrudRepository<Order, Long> {
 
 
 //
-//    @Query(name ="SELECT * FROM ORDERS as o WHERE  o.endDate > date", nativeQuery=true)
-//    List<Order> getAllOrderByEndDate(@Param("date") String date);
+    @Query(name ="SELECT * FROM ORDERS as o WHERE  DATEDIFF(o.endDate, date) < 0 ", nativeQuery=true)
+    List<Order> getAllOrderByEndDate(@Param("date") Date date);
 //, @Param("time") Date time
 
 }

@@ -16,11 +16,19 @@
 
       <section class="network" style="margin-top: 100px">
           <div class="container">
-              <div class="row r0">
+              <div class="row r7">
                   <div class="col">
                       <h1>
-                          Приветствую зарегистрированный пользователь <span id="NameSpan"></span>
+                          Приветствую зарегистрированный пользователь
                       </h1>
+                      <h2>
+                          <span id="NameSpan"></span>
+                      </h2>
+                  </div>
+              </div>
+              <div class="row r0">
+                  <div class="col c0">
+
                       <hr>
                       <div style="display: flex">
                           <label>Id - </label>
@@ -70,8 +78,6 @@
                       </div>
 
                   </div>
-              </div>
-              <div class="row r1" style="display: flex;">
                   <div class="col с1">
                       <hr>
                       <h5>
@@ -87,28 +93,49 @@
                       </div>
 
                   </div>
-                  <div class="col с2">
+
+              </div>
+              <div class="row r1" style="display: flex;">
+
+                  <div class="col с2" >
                       <div style="display: flex;">
                           <div>
                               <hr>
-                              <h5>
-                                  Список вашей недвижимости, которую вы арендовали
-                              </h5>
+                              <div >
+                                  <div>
+                                      <input type="button" value="История, того что вы арендовали" onclick="getHistory(1)">
+                                  </div>
+                                  <h5>
+                                      Список вашей недвижимости, которую вы арендовали
+                                  </h5>
+
+                              </div>
+
                               <div id="listFlat2">
 
                               </div>
                           </div>
-                          <div>
-                              <hr>
+
+                      </div>
+
+                  </div>
+                  <div class="col">
+                      <div>
+                          <hr>
+                          <div >
+                              <div>
+                                  <input type="button" value="История, того что арендовали у вас" onclick="getHistory(2)">
+                              </div>
                               <h5>
                                   Недвижимость которую арендовали у вас
                               </h5>
-                              <div id="listFlat3">
 
-                              </div>
+                          </div>
+
+                          <div id="listFlat3">
+
                           </div>
                       </div>
-
                   </div>
               </div>
               <div class="row r2">

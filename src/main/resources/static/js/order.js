@@ -43,14 +43,115 @@ async function loadOrder(){
 
         if(responseOrder.ok){
             let list = await responseOrder.json();
-            alert("список пришел");
+            //alert("список пришел");
             let orders = document.getElementById("ListFlatDate");
-            alert(list.value);
+            //alert(list.length);
 
             if(list.length>0){
+                orders.style.border='1px solid black';
+                let title = document.createElement('h3');
+                title.innerText='Список состоит из - '+list.length;
+                orders.appendChild(title);
+                let divFlat = document.createElement('div');
+                divFlat.style.height='200px';
+                divFlat.style.overflow='scroll';
 
+                for(let i=0;i<list.length;i++) {
+                    // let flat = list[i].flat;
+                    // let person = list[i].person;
+                    // //div - ячейка для данных по 1 кв
+                    // //listFlatId.push(resp[i].idFlat);
+                    // //alert("формируемый массив - "+listFlatId.length);
+                    // let div1 = document.createElement('div');
+                    // div1.style.display="flex";
+                    // div1.style.border="1px solid blue";
+                    //
+                    // //orderId
+                    // let divI = document.createElement('div');
+                    // divI.style.marginRight='10px';
+                    // //вставляем id квартиры из тбазы данных
+                    // divI.innerText = list[i].orderId;
+                    // div1.appendChild(divI);
+                    // //flatId
+                    // let divIdFlat = document.createElement('div');
+                    // divIdFlat.style.marginRight='10px';
+                    // //вставляем id квартиры из тбазы данных
+                    // divIdFlat.innerText = 'idFlat -'+flat.idFlat;
+                    // div1.appendChild(divIdFlat);
+                    // // //name
+                    // // let divName = document.createElement('div');
+                    // // divName.style.marginRight='10px';
+                    // // divName.innerText = flat.nameFlat;
+                    // // div1.appendChild(divName);
+                    // // //price
+                    // // let divPrice = document.createElement('div');
+                    // // divPrice.style.marginRight='10px';
+                    // // divPrice.innerText = flat.price;
+                    // // div1.appendChild(divPrice);
+                    // // //rating
+                    // // let divRating = document.createElement('div');
+                    // // divRating.style.marginRight='10px';
+                    // // divRating.innerText = flat.ratingFlat;
+                    // // div1.appendChild(divRating);
+                    // // // //Address
+                    // // let divAddress = document.createElement('div');
+                    // // divAddress.style.marginRight='10px';
+                    // // divAddress.innerText = 'Адрес - '+flat.countryFlat+', '+flat.cityFlat+', '+flat.addressFlat;
+                    // // div1.appendChild(divAddress);
+                    //
+                    // //close order
+                    // let butUpdate = document.createElement('input');
+                    // butUpdate.type='button';
+                    // butUpdate.addEventListener('click', function(){
+                    //     closeOrder(list[i].orderId);
+                    // });
+                    // butUpdate.style.marginRight='10px';
+                    // butUpdate.value = 'Close';
+                    // div1.appendChild(butUpdate);
+                    //вторая строка
+                    let div2 = document.createElement('div');
+                    div2.style.display='flex';
+                    div2.style.border="1px solid blue";
+                    // //image
+                    // let divImage = document.createElement('div');
+                    // divImage.style.marginRight='10px';
+                    // let img = document.createElement('img');
+                    // img.height=200;
+                    // img.src=flat.image;
+                    // divImage.appendChild(img);
+                    // div2.appendChild(divImage);
+                    // //about
+                    // let divAbout = document.createElement('div');
+                    // divAbout.style.marginRight='10px';
+                    // divAbout.innerText = flat.about;
+                    // div2.appendChild(divAbout);
+                    //
+                    //startDate
+                    let startDate = document.createElement('div');
+                    startDate.style.marginRight='10px';
+                    startDate.innerText =new Date(list[i].startDate).toLocaleDateString();
+                    div2.appendChild(startDate);
+                    //
+                    //endDate
+                    let endDate = document.createElement('div');
+                    endDate.style.marginRight='10px';
+                    endDate.innerText = new Date(list[i].endDate).toLocaleDateString();
+                    div2.appendChild(endDate);
+                    //
+                    // let personRating = document.createElement('div');
+                    // personRating.style.marginRight='10px';
+                    // personRating.innerText = 'РП - '+person.ratingPerson;
+                    // div2.appendChild(personRating);
+                    //сборка
 
-                orders.innerText = "Список заказов = "+Number(list.length);
+                    let divAll = document.createElement('div');
+                    //divAll.appendChild(div1);
+                    divAll.appendChild(div2);
+                    // вставляем все данные по 1 объекту в scroll
+                    divFlat.appendChild(divAll);
+                }
+                orders.appendChild(divFlat);
+
             }
             else{
 
@@ -60,15 +161,10 @@ async function loadOrder(){
         else{
             alert("где то ошибка")
         }
-
-
     }
-
     else{
             alert('ошибка получения данных');
-
     }
-
 }
 
 function getFlat(flat){

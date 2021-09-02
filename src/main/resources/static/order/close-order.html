@@ -11,8 +11,56 @@
 <div>
     <input type="button" value="Назад" onclick="back()">
 </div>
-<h1>
-  Close order
-</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>
+                Close order
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h5>
+                Данные по ордеру
+            </h5>
+            <div id="Order"></div>
+        </div>
+        <div class="col">
+            <h5>
+                Данные по недвижимости
+            </h5>
+            <div id="Flat"></div>
+        </div>
+        <div class="col">
+            <h5>
+                Данные по владельцу/покупателю
+            </h5>
+            <div id="Person"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <hr>
+            <form>
+                <div id="Dop" style="">
+                    <label>Выставте оценку квартире</label>
+                    <input type="number" id="RatingFlat" placeholder="ratingFlat" required>
+                </div>
+                <div>
+                    <label id="LabelPerson"></label>
+                    <input type="number" id="RatingPerson" placeholder="ratingPerson" required>
+                </div>
+
+                <div id="InputDop"></div>
+                <div>
+                    <input type="button" value="ЗАКРЫТЬ СДЕЛКУ" onclick="closeOrderOk()">
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

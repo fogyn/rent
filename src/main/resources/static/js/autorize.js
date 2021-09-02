@@ -79,7 +79,7 @@ async function testData(){
         body: JSON.stringify(client0)
     });
     if(response0.ok) {
-        alert("регистрация0 !!! ok");
+        //alert("регистрация0 !!! ok");
         let answerServ = await response0.json();
        // let answer2 = answerServ.person
         token1 = answerServ.token;
@@ -232,7 +232,7 @@ async function testData(){
         body: JSON.stringify(order1)
     });
     if(responseOrder.ok) {
-        alert('order добавлен');
+        //alert('order добавлен');
         //
 
     }
@@ -261,7 +261,7 @@ async function testData(){
         body: JSON.stringify(order3)
     });
     if(responseOrder3.ok) {
-        alert('order3 добавлен');
+        //alert('order3 добавлен');
         //
 
     }
@@ -290,7 +290,7 @@ async function testData(){
         body: JSON.stringify(order2)
     });
     if(responseOrder2.ok) {
-        alert('order2 добавлен');
+        alert('все добавлено');
         //
 
     }

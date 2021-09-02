@@ -102,5 +102,18 @@ public class OrderService {
         System.out.println(listOrders.size());
         return listOrders;
     }
+
+    public Order getOrderById(long id){
+        return orderRepo.findById(id).get();
+    }
+
+    public boolean todoUpdateOrder2(Order order) {
+        try {
+            orderRepo.save(order);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
 }
  

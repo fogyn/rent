@@ -1,5 +1,6 @@
 package com.dip.rent.controller;
 
+import com.dip.rent.model.Flat;
 import com.dip.rent.model.Order;
 import com.dip.rent.model.response.OrderByFlatListDTO;
 import com.dip.rent.model.response.OrdersByPersonDTO;
@@ -37,7 +38,10 @@ public class OrderController {
     @NotFound
     @PostMapping("closeOrder")
     public ResponseEntity<Order> updatePerson(@RequestBody Order order) {
-        //System.out.println("id - "+person.getId());
+        System.out.println("!!!!!!!!!!!!!!!!!!!!! CLOSE");
+        System.out.println("!!!!!!!!!!!!!!!!!!!!! CLOSE");
+        System.out.println("!!!!!!!!!!!!!!!!!!!!! CLOSE");
+
         Order orderSQL = orderService.todoUpdateOrder(order);
         return ResponseEntity.status(HttpStatus.OK).body(orderSQL);
     }
@@ -56,5 +60,32 @@ public class OrderController {
         //System.out.println("зашел = "+ordersDTO.isDateBoolean());
         //System.out.println("зашел id= "+ordersDTO.getListFlatId().get(0));
         return ResponseEntity.status(HttpStatus.OK).body(orderService.getAllOrderByFlats(ordersDTO));
+    }
+    @NotFound
+    @GetMapping("getOrderById/{id}")
+    public ResponseEntity<Order> getOrderById(@PathVariable int id) {
+        System.out.println("запрос на ордер по id");
+        System.out.println("id - "+id);
+        try {
+            Order order = orderService.getOrderById(id);
+            return ResponseEntity.status(HttpStatus.OK).body(order);
+        }
+        catch (NullPointerException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new Order());
+        }
+    }
+    @NotFound
+    @PostMapping("updateOrder")
+    public ResponseEntity<String> updateOrder(@RequestBody Order order) {
+        System.out.println("id - "+order.getOrderId());
+        System.out.println("idPerson - "+order.getPerson().getId());
+        boolean answer = orderService.todoUpdateOrder2(order);
+        if(answer){
+            return ResponseEntity.status(HttpStatus.OK).body("Ok");
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bed");
+        }
+
     }
 }

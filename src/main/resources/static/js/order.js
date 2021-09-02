@@ -260,8 +260,12 @@ function getParamOrder(){
     let dateOff = document.getElementById('DateOff');
 
     return {
-        personId: Number(idPerson),
-        flatId: Number(idFlat.innerText),
+        person: {
+            id:Number(idPerson)
+        },
+        flat:{
+            idFlat:Number(idFlat.innerText)
+        },
         startDate: dateOn.value,
         endDate: dateOff.value
     }

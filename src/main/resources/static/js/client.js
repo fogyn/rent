@@ -272,7 +272,7 @@ async function deleteFlat(idFlat){
 }
 // я арендовал - мой id
 async function loadOrder2(personId){
-    alert("заказчик по id!!!!!!!!!!!!!="+personId)
+    //alert("заказчик по id!!!!!!!!!!!!!="+personId)
     let token = sessionStorage.getItem('userKey');
 
     let personDTO = {
@@ -355,7 +355,7 @@ async function loadOrder2(personId){
                 let butUpdate = document.createElement('input');
                 butUpdate.type='button';
                 butUpdate.addEventListener('click', function(){
-                    closeOrder(list[i].orderId);
+                    closeOrder(list[i].orderId, 1);
                 });
                 butUpdate.style.marginRight='10px';
                 butUpdate.value = 'Close';
@@ -419,7 +419,7 @@ async function loadOrder3(listFlatId){
     let listId = [];
     //alert(listFlatId);
     if(Number(listFlatId)===0){
-        alert("список недвижимости 0000000 - "+listFlatId);
+       // alert("список недвижимости 0000000 - "+listFlatId);
         let orderFlat = document.getElementById('listFlat3');
         orderFlat.innerText = "Список заказов на вашу недвижимость пуст.";
     }
@@ -443,7 +443,7 @@ async function loadOrder3(listFlatId){
             }
             list.push(flat);
         }
-alert(list.length)
+//alert(list.length)
 // нужен список всех квартир
         let orderDTO = {
             listFlat: list,
@@ -531,7 +531,7 @@ alert(list.length)
                     let butUpdate = document.createElement('input');
                     butUpdate.type='button';
                     butUpdate.addEventListener('click', function(){
-                        closeOrder(list[i].orderId);
+                        closeOrder(list[i].orderId, 2);
                     });
                     butUpdate.style.marginRight='10px';
                     butUpdate.value = 'Close';
@@ -605,9 +605,9 @@ function getHistory(i){
 
 }
 
-function closeOrder(idOrder){
+function closeOrder(idOrder, type){
     sessionStorage.removeItem('closeId');
     let idO = Number(idOrder);
     sessionStorage.setItem('closeId', idO);
-    window.location = "http://localhost:9000/order/close-order.html";
+    window.location = "http://localhost:9000/order/close-order.html?type="+Number(type);
 }
